@@ -1,5 +1,5 @@
+import { type Address } from 'viem'
 // RawTransaction - what Covalent returns (will slim down)
-// WalletRecap - your aggregated output
 // Nameplate - the badges/categories
 
 // Supported chains with their Covalent IDs:
@@ -17,4 +17,30 @@ const SUPPORTED_CHAINS = {
     "zkSync-Era-testnet": 4002,
     "arbitrum-one": 42161,
     "arbitrum-sepolia": 421614,
+}
+
+// Aggregator function return types
+type MostTransactedToken = {
+    symbol: string,
+    count: number
+}
+
+type GasSpent = {
+    native: number,
+    usd: number
+}
+
+// WalletRecap - your aggregated output
+// - The wallet address
+// - The year
+// - Results from aggregators (transaction by chain, top token, unique contracts, NFT count, gas spent, nameplates)
+// - Anything else?
+type WalletRecap = {
+    address: Address,
+    year: number,
+    topToken: MostTransactedToken,
+    uniqueContracts: number,
+    nftCount: number,
+    gasSpent: GasSpent,
+    nameplates: []
 }
