@@ -4,28 +4,28 @@ import { type Address } from 'viem'
 
 // Supported chains with their Covalent IDs:
 // key (chain_name): value (chain_id)
-const SUPPORTED_CHAINS = {
+export const SUPPORTED_CHAINS = {
     "eth-mainnet": 1,
     "base-mainnet": 8453,
     "polygon-mainnet": 137,
     "bnb": 56,
     "zkSync-Era": 324,
     "arbitrum-mainnet": 42161,
-}
+} as const
 
 // Aggregator function return types
-type MostTransactedToken = {
+export type MostTransactedToken = {
     symbol: string,
     count: number
 }
 
-type GasSpent = {
+export type GasSpent = {
     native: number,
     usd: number
 }
 
 // WalletRecap
-type WalletRecap = {
+export type WalletRecap = {
     address: Address,
     year: number,
     topToken: MostTransactedToken,
