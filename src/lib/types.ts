@@ -1,6 +1,6 @@
 import { type Address } from 'viem'
-// RawTransaction - what Covalent returns (will slim down)
-// Nameplate - the badges/categories
+// RawTransaction - what Covalent returns (will slim down)?
+// Nameplate - the badges/categories?
 
 // Supported chains with their Covalent IDs:
 // key (chain_name): value (chain_id)
@@ -24,7 +24,7 @@ type GasSpent = {
     usd: number
 }
 
-// WalletRecap - your aggregated output
+// WalletRecap
 type WalletRecap = {
     address: Address,
     year: number,
