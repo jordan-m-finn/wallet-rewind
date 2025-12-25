@@ -6,17 +6,11 @@ import { type Address } from 'viem'
 // key (chain_name): value (chain_id)
 const SUPPORTED_CHAINS = {
     "eth-mainnet": 1,
-    "eth-sepolia": 11155111,
     "base-mainnet": 8453,
-    "base-sepolia": 84532,
     "polygon-mainnet": 137,
-    "polygon-amoy": 80002,
     "bnb": 56,
-    "bnb-testnet": 97,
     "zkSync-Era": 324,
-    "zkSync-Era-testnet": 4002,
-    "arbitrum-one": 42161,
-    "arbitrum-sepolia": 421614,
+    "arbitrum-mainnet": 42161,
 }
 
 // Aggregator function return types
@@ -30,6 +24,11 @@ type GasSpent = {
     usd: number
 }
 
+type TransactionByChain = {
+    chain: string,
+    count: number
+}
+
 // WalletRecap - your aggregated output
 // - The wallet address
 // - The year
@@ -41,6 +40,7 @@ type WalletRecap = {
     topToken: MostTransactedToken,
     uniqueContracts: number,
     nftCount: number,
-    gasSpent: GasSpent,
-    nameplates: []
+    gasSpent: GasSpent[],
+    nameplates: string[],
+    transactionByChain: TransactionByChain[]
 }
