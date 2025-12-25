@@ -24,23 +24,14 @@ type GasSpent = {
     usd: number
 }
 
-type TransactionByChain = {
-    chain: string,
-    count: number
-}
-
 // WalletRecap - your aggregated output
-// - The wallet address
-// - The year
-// - Results from aggregators (transaction by chain, top token, unique contracts, NFT count, gas spent, nameplates)
-// - Anything else?
 type WalletRecap = {
     address: Address,
     year: number,
     topToken: MostTransactedToken,
     uniqueContracts: number,
     nftCount: number,
-    gasSpent: GasSpent[],
+    gasSpent: Record<string, GasSpent>,
     nameplates: string[],
-    transactionByChain: TransactionByChain[]
+    transactionByChain: Record<string, number> 
 }
