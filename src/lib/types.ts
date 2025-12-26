@@ -44,10 +44,12 @@ export type Transaction = {
     // Access the token info in the logs of the transaction response returned by Covalent in which
     //   items[i].log_events[j] contains sender_name, sender_contract_ticker_symbol, and sender_address (the token contract)
     //   to verify
-    tokenSymbol: string,
+    tokenSymbol: string[],
     contractAddress: Address,
     // To detect NFT transfers, we need to access the log event information, "supports_erc" array to determine if it contains "erc721" or "erc1155"
     // OR check if the decoded event (decoded.name, .params) is one of "Transfer", "TransferSingle", or "TransferBatch"
-    nftTransfer: string,
-    gasSpent: Record<string, GasSpent>
+    isNFTTransfer: boolean,
+    gasSpent: number,
+    // Needed in order to filer by year
+    block_signed_at: string
 }
