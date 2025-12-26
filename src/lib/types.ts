@@ -36,7 +36,7 @@ export type WalletRecap = {
     transactionByChain: Record<string, number> 
 }
 
-export SwapSafeTokenInformation = {
+export type SwapSafeTokenInformation = {
     token: string,
     contractAddress: Address
 }
