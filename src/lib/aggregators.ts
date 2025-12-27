@@ -9,8 +9,11 @@
 
 export function countTransactionsByChain(_transactions: Transaction[]): Record<string, number> {
     const counts: Record<string, number> = {};
-    // loop
-    for (let i = 0; i < _transactions.chainName.size; i++) {
+
+    for (const txn of _transactions) {
+        const key = txn.chainName;
         counts[key] = (counts[key] ?? 0) + 1;
     }
+    
+    return counts;
 }
