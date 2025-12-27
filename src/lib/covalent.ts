@@ -58,7 +58,7 @@ export async function getTransactions(
         // Since these are unique at the response level and not the item level, we'll capture them here
         const { chain_id, chain_name, items } = response.data;
     
-        for (const item of response.data.items) {
+        for (const item of items) {
             // 2, Filter by year first
             // convert covalent timestamp -> JS Date
             const txYear = new Date(item.block_signed_at).getFullYear();
