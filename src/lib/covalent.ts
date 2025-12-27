@@ -42,13 +42,18 @@ export async function getTransactions(
     year: number
 ): Promise<Transaction[]> {
     const apiKey = process.env.COVALENT_API_KEY;
+    if (!apiKey) throw new Error("Missing Covalent API key");
+
     const baseUrl = `https://api.covalenthq.com/v1/${chainSlug}/address/${address}/transactions_v3/`;
     let nextUrl: string | null = baseUrl;
 
     let filteredTransactions: Transaction[] = [];
 
+    // flag for exiting based on year
+    let isYearOutOfBounds = false;
+
     // 1. fetch from Covalent (handle pagination)
-    while(nextUrl) {
+    while(nextUrl && !isYearOutOfBounds) {
         const covalentResponse = await fetch(nextUrl, {
             headers: {
                 'Authorization': `Bearer ${apiKey}`
@@ -57,14 +62,25 @@ export async function getTransactions(
         const response = await covalentResponse.json();
         
         // Since these are unique at the response level and not the item level, we'll capture them here
-        const { chain_id, chain_name, items } = response.data;
+        const data = response.data;
+        if (!data || !Array.isArray(data.items)) break;
+        const { chain_id, chain_name, items } = data;
     
         for (const item of items) {
             // 2, Filter by year first
             // convert covalent timestamp -> JS Date
-            const txYear = new Date(item.block_signed_at).getFullYear();
-            if (txYear !== year) continue;
-            
+            const txDate = new Date(item.block_signed_at);
+            const txYear = txDate.getFullYear();
+           
+            // Early Exit: older than target year -> stop everything
+            if (txYear < year) {
+                stop = true;
+                break;
+            }
+
+            // skip newer years but continue scanning
+            if (txYear > year) continue;
+
             // 3. Extract processed fields 
             const tokenInfo = extractTokenInfo(item.log_events);
             const isNFT = detectNFT(item.log_events);
@@ -75,9 +91,9 @@ export async function getTransactions(
             
             // 5. Push the formatted Transaction object 
             filteredTransactions.push({
-                chainID: chain_id,
-                chainName: chain_name,
-                toAddress: item.to_address,
+                chainID: chain_id as (typeof SUPPORTED_CHAINS)[keyof typeof SUPPORTED_CHAINS],
+                chainName: chain_name as keyof typeof SUPPORTED_CHAINS,
+                toAddress: item.to_address as Address,
                 token: tokenInfo,
                 isNFTTransfer: isNFT, 
                 gasSpent: {
@@ -87,10 +103,11 @@ export async function getTransactions(
                 block_signed_at: item.block_signed_at,
             });
         }
-       
-        // Check for early exit (hit a txn older than target year)
         
-        // Check for next page
+        // outer loop stop check
+        if (isYearOutOfBounds) break;
+        
+        // Check for / get next page
         nextUrl = response.links?.next ?? null;
     } 
 
