@@ -1,5 +1,5 @@
 import { type Address } from 'viem'
-import { SUPPORTED_CHAINS, Transaction } from './types.ts'
+import { SUPPORTED_CHAINS, Transaction, SwapSafeTokenInformation } from './types.ts'
 // Goal: fetch transactions for a single address on one chain (start with Ethereum mainnet)
 // 1. `getTransactions(chainSlug: string, address: string, year: number)` — fetches paginated transactions within date range
 // 2. `getTransactionsAllChains(address: string, year: number)` — fans out to all chains, returns combined
@@ -31,6 +31,44 @@ function extractFilteredResponse(response: any): any {
     };
 }
 
+function extractTokenInfo(logEvents: any[]): SwapSafeTokenInformation[] {
+    const map = new Map<string, SwapSafeTokenInformation>();
+
+    for (const log of logEvents) {
+        if (!log.sender_address) continue;
+
+        const key = log.sender_address.toLowerCase();
+
+        if (!map.has(key)) {
+            map.set(key, {
+                token: log.sender_contract_ticker_symbol ?? log.sender_name ?? "UNKNOWN",
+                contractAddress: log.sender_address
+            });
+        }
+    }
+
+    return Array.from(map.values());
+}
+
+function detectNFT(logEvents: any[]): boolean {
+    for (const log of logEvents) {
+        // check supports_erc array
+        if (log.supports_erc?.includes("erc721") || log.supports_erc?.includes("erc1155")) {
+            return true;
+        }
+
+        // check decoded event names
+        const name = log.decoded?.name;
+        if (!name) continue;
+
+        if (name === "Transfer" || name === "TransferSingle" || name === "TransferBatch") {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 export async function getTransactions(
     chainSlug: keyof typeof SUPPORTED_CHAINS,
     address: Address,
@@ -56,8 +94,10 @@ export async function getTransactions(
             const txYear = new Date(item.block_signed_at).getFullYear();
             if (txYear !== year) continue;
             
-            // 3. Extract processed fields using extractFilteredResponse()
+            // 3. Extract processed fields 
             const filteredTransactionData = extractFilteredResponse(item);
+            const tokenInfo = extractTokenInfo(item.log_events);
+            const isNFT = detectNFT(item.log_events);
 
             // 4. compute gas
             const gasSpentNative = (Number(item.gas_spent) * Number(item.gas_price)) / 1e18;
@@ -68,8 +108,8 @@ export async function getTransactions(
                 chainID: filteredTransactionData.chain_id,
                 chainName: filteredTransactionData.chain_name,
                 toAddress: filteredTransactionData.to_address,
-                token: filteredTransactionData.tokens,
-                isNFTTransfer: filteredTransactionData.isNFTTransfer, 
+                token: tokenInfo,
+                isNFTTransfer: isNFT, 
                 gasSpent: {
                     native: gasSpentNative,
                     usd: gasSpentUSD,
