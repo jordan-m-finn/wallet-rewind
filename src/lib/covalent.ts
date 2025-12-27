@@ -43,24 +43,39 @@ export async function getTransactions(
 
     // 1. fetch from Covalent (handle pagination)
     try {
-        const covalentResponse = await fetch(baseUrl);
+        const covalentResponse = await fetch(baseUrl, {
+            headers: {
+                'Authorization': `Bearer ${apiKey}`
+            }
+        });
         const transaction = await covalentResponse.json();
-       
-        // instead of console, handle paginated data 
-        const filteredTransactionData = extractFilteredResponse(transaction);
     
-        for (const item of filtered.items) {
+        for (const item of covalentResponse.items) {
+            // 2, Filter by year first
             // convert covalent timestamp -> JS Date
             const txYear = new Date(item.block_signed_at).getFullYear();
+            if (txYear !== year) continue;
+            
+            // 3. Extract processed fields using extractFilteredResponse()
+            const filteredTransactionData = extractFilteredResponse(item);
 
-            // To gather a particular year's txn data
-            if (txYear === year) {
-                filteredTransactions.push({
-                    chain_id: filteredTransactionData.chain_id,
-                    chain_name: filteredTransactionData.chain_name,
-                    ...item,
-                } as Transaction);
-            }
+            // 4. compute gas
+            const gasSpentNative = (Number(item.gas_spent) * Number(item.gas_price)) / 1e18;
+            const gasSpentUSD = Number(item.gas_quote) || 0;
+            
+            // 5. Push the formatted Transaction object 
+            filteredTransactions.push({
+                chainID: filteredTransactionData.chain_id,
+                chainName: filteredTransactionData.chain_name,
+                toAddress: filteredTransactionData.to_address,
+                token: filteredTransactionData.tokens,
+                isNFTTransfer: filteredTransactionData.isNFTTransfer, 
+                gasSpent: {
+                    native: gasSpentNative,
+                    usd: gasSpentUSD,
+                },
+                block_signed_at: item.block_signed_at,
+            });
         }
 
         // remove logs later
@@ -73,11 +88,7 @@ export async function getTransactions(
         console.error(error);
     }
 
+    // 6. return the array of transactions
     return filteredTransactions;
-    // 2. filter transactions to only include those from 'year'
-     
-
-    // 3. transform Covalent's response into the Transaction type
-    // 4. return the array of transactions
 
 }
