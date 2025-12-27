@@ -6,31 +6,6 @@ import { SUPPORTED_CHAINS, Transaction, SwapSafeTokenInformation } from './types
 // Note:
 //  Covalent's v3 endpoint we'll hit is GET https://api.covalenthq.com/v1/{chainSlug}/address/{address}/transactions_v3
 
-// Helper function to extract particular fields within the transactions response from Covalent in getTransactions()
-// make a custom returned type later for additional safety?
-function extractFilteredResponse(response: any): any {
-    return {
-        chain_id: response.chain_id,
-        chain_name: response.chain_name,
-        items: response.items.map((item: any) => ({
-            to_address: item.to_address,
-            log_events: item.log_events.map((log: any) => ({
-                sender_name: log.sender_name,
-                sender_contract_ticker_symbol: log.sender_contract_ticker_symbol,
-                sender_address: log.sender_address,
-                decoded: {
-                    name: log.decoded?.name || "",
-                    params: log.decoded?.params || [],
-                },
-            })),
-            gas_spent: item.gas_spent,
-            gas_price: item.gas_price,
-            gas_quote: item.gas_quote,
-            block_signed_at: item.block_signed_at,
-        })),
-    };
-}
-
 function extractTokenInfo(logEvents: any[]): SwapSafeTokenInformation[] {
     const map = new Map<string, SwapSafeTokenInformation>();
 
@@ -56,14 +31,6 @@ function detectNFT(logEvents: any[]): boolean {
         if (log.supports_erc?.includes("erc721") || log.supports_erc?.includes("erc1155")) {
             return true;
         }
-
-        // check decoded event names
-        const name = log.decoded?.name;
-        if (!name) continue;
-
-        if (name === "Transfer" || name === "TransferSingle" || name === "TransferBatch") {
-            return true;
-        }
     }
     
     return false;
@@ -86,16 +53,18 @@ export async function getTransactions(
                 'Authorization': `Bearer ${apiKey}`
             }
         });
-        const transaction = await covalentResponse.json();
+        const response = await covalentResponse.json();
+        
+        // Since these are unique at the response level and not the item level, we'll capture them here
+        const { chain_id, chain_name, items } = response.data;
     
-        for (const item of covalentResponse.items) {
+        for (const item of response.data.items) {
             // 2, Filter by year first
             // convert covalent timestamp -> JS Date
             const txYear = new Date(item.block_signed_at).getFullYear();
             if (txYear !== year) continue;
             
             // 3. Extract processed fields 
-            const filteredTransactionData = extractFilteredResponse(item);
             const tokenInfo = extractTokenInfo(item.log_events);
             const isNFT = detectNFT(item.log_events);
 
@@ -105,9 +74,9 @@ export async function getTransactions(
             
             // 5. Push the formatted Transaction object 
             filteredTransactions.push({
-                chainID: filteredTransactionData.chain_id,
-                chainName: filteredTransactionData.chain_name,
-                toAddress: filteredTransactionData.to_address,
+                chainID: chain_id,
+                chainName: chain_name,
+                toAddress: item.to_address,
                 token: tokenInfo,
                 isNFTTransfer: isNFT, 
                 gasSpent: {
@@ -117,13 +86,6 @@ export async function getTransactions(
                 block_signed_at: item.block_signed_at,
             });
         }
-
-        // remove logs later
-        console.log("\nTransaction response:");
-        console.log(transaction);
-        console.log("\nTransaction response filtered:");
-        console.log(filteredTransactionData);
-
     } catch (error) {
         console.error(error);
     }
