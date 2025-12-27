@@ -110,5 +110,19 @@ export async function getTransactions(
 
     // 6. return the array of transactions
     return filteredTransactions;
+}
 
+export async function getTransactionsAllChains(
+    address: Address,
+    year: number
+): Promise<Transaction[]> {
+    // Fan out to all chains in SUPPORTED_CHAINS
+    // Combine results into single array
+    const chains = Object.keys(SUPPORTED_CHAINS) as (keyof typeof SUPPORTED_CHAINS)[];
+
+    const results = await Promise.all(
+        chains.map(chain => getTransactions(chain, address, year))
+    );
+
+    return results.flat();
 }
