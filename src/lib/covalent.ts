@@ -117,6 +117,7 @@ export async function getTransactionsAllChains(
     const results = await Promise.all(
         chains.map(chain => getTransactions(chain, address, year))
     );
-
+    
+    // Flattens our nested array by one level turning [][] into []
     return results.flat();
 }
