@@ -74,7 +74,7 @@ export async function getTransactions(
            
             // Early Exit: older than target year -> stop everything
             if (txYear < year) {
-                stop = true;
+                isYearOutOfBounds = true;
                 break;
             }
 
@@ -103,9 +103,6 @@ export async function getTransactions(
                 block_signed_at: item.block_signed_at,
             });
         }
-        
-        // outer loop stop check
-        if (isYearOutOfBounds) break;
         
         // Check for / get next page
         nextUrl = response.links?.next ?? null;
