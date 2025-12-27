@@ -112,12 +112,11 @@ export async function getTransactions(
     return filteredTransactions;
 }
 
+// Fans out to all chains in SUPPORTED_CHAINS and combines the result into a single array
 export async function getTransactionsAllChains(
     address: Address,
     year: number
 ): Promise<Transaction[]> {
-    // Fan out to all chains in SUPPORTED_CHAINS
-    // Combine results into single array
     const chains = Object.keys(SUPPORTED_CHAINS) as (keyof typeof SUPPORTED_CHAINS)[];
 
     const results = await Promise.all(
