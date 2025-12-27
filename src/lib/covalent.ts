@@ -23,9 +23,9 @@ function extractFilteredResponse(response: any): any {
                     params: log.decoded?.params || [],
                 },
             })),
-            gas_spent: items.gas_spent,
-            gas_price: items.gas_price,
-            gas_quote: items.gas_quote,
+            gas_spent: item.gas_spent,
+            gas_price: item.gas_price,
+            gas_quote: item.gas_quote,
             block_signed_at: item.block_signed_at,
         })),
     };
@@ -39,7 +39,7 @@ export async function getTransactions(
     const apiKey = process.env.COVALENT_API_KEY;
     const baseUrl = `https://api.covalenthq.com/v1/${chainSlug}/address/${address}/transactions_v3/`;
    
-    let Transaction[] = filteredTransaions;
+    let filteredTransactions: Transaction[] = [];
 
     // 1. fetch from Covalent (handle pagination)
     try {
@@ -48,16 +48,32 @@ export async function getTransactions(
        
         // instead of console, handle paginated data 
         const filteredTransactionData = extractFilteredResponse(transaction);
-        filteredTransactions.push(filteredTransactionData); 
+    
+        for (const item of filtered.items) {
+            // convert covalent timestamp -> JS Date
+            const txYear = new Date(item.block_signed_at).getFullYear();
+
+            // To gather a particular year's txn data
+            if (txYear === year) {
+                filteredTransactions.push({
+                    chain_id: filteredTransactionData.chain_id,
+                    chain_name: filteredTransactionData.chain_name,
+                    ...item,
+                } as Transaction);
+            }
+        }
+
         // remove logs later
         console.log("\nTransaction response:");
         console.log(transaction);
         console.log("\nTransaction response filtered:");
         console.log(filteredTransactionData);
+
     } catch (error) {
         console.error(error);
     }
 
+    return filteredTransactions;
     // 2. filter transactions to only include those from 'year'
      
 
