@@ -43,12 +43,13 @@ export async function getTransactions(
 ): Promise<Transaction[]> {
     const apiKey = process.env.COVALENT_API_KEY;
     const baseUrl = `https://api.covalenthq.com/v1/${chainSlug}/address/${address}/transactions_v3/`;
-   
+    let nextUrl: string | null = baseUrl;
+
     let filteredTransactions: Transaction[] = [];
 
     // 1. fetch from Covalent (handle pagination)
-    try {
-        const covalentResponse = await fetch(baseUrl, {
+    while(nextUrl) {
+        const covalentResponse = await fetch(nextUrl, {
             headers: {
                 'Authorization': `Bearer ${apiKey}`
             }
@@ -86,9 +87,12 @@ export async function getTransactions(
                 block_signed_at: item.block_signed_at,
             });
         }
-    } catch (error) {
-        console.error(error);
-    }
+       
+        // Check for early exit (hit a txn older than target year)
+        
+        // Check for next page
+        nextUrl = response.links?.next ?? null;
+    } 
 
     // 6. return the array of transactions
     return filteredTransactions;
