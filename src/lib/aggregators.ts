@@ -1,3 +1,4 @@
+import { Transaction, MostTransactedToken } from './types'
 // Goal: Take raw txns -> compute most transacted token, tx count, unique contracts interacted with
 // Functions needed:
 // countTransactionsByChain()
@@ -15,5 +16,19 @@ export function countTransactionsByChain(transactions: Transaction[]): Record<st
         counts[key] = (counts[key] ?? 0) + 1;
     }
     
+    return counts;
+}
+
+export function findMostTransactedToken(transactions: Transaction[]): MostTransactedToken {
+    const counts: Record<string, number> = {};
+    let maxCount: number = 0; 
+
+    for (count txn of transactions) {
+        // txn.token returns an array so handle that
+        const key = txn.token[];
+        if (value > maxCount) { maxCount = value; }
+        // add to the counts array
+    }
+
     return counts;
 }
