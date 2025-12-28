@@ -21,14 +21,25 @@ export function countTransactionsByChain(transactions: Transaction[]): Record<st
 
 export function findMostTransactedToken(transactions: Transaction[]): MostTransactedToken {
     const counts: Record<string, number> = {};
+    let maxSymbol: string = "";
     let maxCount: number = 0; 
 
     for (count txn of transactions) {
         // txn.token returns an array so handle that
-        const key = txn.token[];
-        if (value > maxCount) { maxCount = value; }
-        // add to the counts array
+        for (const tok of txn.token) {
+            const symbol = tok.token;
+            
+            counts[symbol] = (counts[symbol] ?? 0) + 1;
+            
+            if (counts[symbol] > maxCount) {
+                maxCount = counts[symbol];
+                maxSymbol = symbol;
+            }
+        }
     }
 
-    return counts;
+    return {
+        symbol: maxSymbol,
+        count: maxCount
+    };
 }
