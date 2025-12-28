@@ -19,12 +19,14 @@ export function countTransactionsByChain(transactions: Transaction[]): Record<st
     return counts;
 }
 
-export function findMostTransactedToken(transactions: Transaction[]): MostTransactedToken {
+export function findMostTransactedToken(transactions: Transaction[]): MostTransactedToken | null {
+    if (transactions.length === 0) return null;    
+
     const counts: Record<string, number> = {};
     let maxSymbol: string = "";
     let maxCount: number = 0; 
 
-    for (count txn of transactions) {
+    for (const txn of transactions) {
         // txn.token returns an array so handle that
         for (const tok of txn.token) {
             const symbol = tok.token;
