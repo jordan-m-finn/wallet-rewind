@@ -47,13 +47,11 @@ export function findMostTransactedToken(transactions: Transaction[]): MostTransa
 }
 
 export function countUniqueContracts(transactions: Transaction[]): number {
-    let toAddresses[]: Address;
+    const uniqueAddresses = new Set<Address>();
 
     for (const txn of transactions) {
-       toAddresses.push(txn.toAddress); 
+       uniqueAddresses.push(txn.toAddress); 
     }
-
-    const uniqueAddresses = new Set(toAddresses);
 
     return uniqueAddresses.size;
 
