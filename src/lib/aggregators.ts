@@ -45,3 +45,33 @@ export function findMostTransactedToken(transactions: Transaction[]): MostTransa
         count: maxCount
     };
 }
+
+export function countUniqueContracts(transactions: Transaction[]): number {
+    let toAddresses[]: Address;
+
+    for (const txn of transactions) {
+       toAddresses.push(txn.toAddress); 
+    }
+
+    const uniqueAddresses = new Set(toAddresses);
+
+    return uniqueAddresses.size;
+
+    // NOW (MVP):
+    // Counts unique toAddress values returned by Covalent to display,
+    // "unique addresses interacted with."
+    //
+    // LATER:
+    // We should implement either within this or created a separate aggregator to
+    // separate: 
+    // - dApps from EOAs from token contracts
+    // - indirect contract interactions
+    // - protocol labeling (i.e. "Uniswap" instead of "0x7a25...")
+    //
+    // NOTE:
+    // Eventually, we'll have to perform an on-chain check to determine exactly what a contract
+    // is and will require RPC calls, maintain a map of known dApp addresses, and maybe rely on
+    // Covalent to return appropriate labels for known contracts
+}
+
+
