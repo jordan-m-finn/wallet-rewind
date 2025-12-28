@@ -50,7 +50,7 @@ export function countUniqueContracts(transactions: Transaction[]): number {
     const uniqueAddresses = new Set<Address>();
 
     for (const txn of transactions) {
-       uniqueAddresses.push(txn.toAddress); 
+       uniqueAddresses.add(txn.toAddress); 
     }
 
     return uniqueAddresses.size;
