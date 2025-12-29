@@ -21,6 +21,9 @@ export async function GET(
     // 3. Fetch transactions
     // 4. Run aggregators
     // 5. Build and return WalletRecap
-
-
+    
+    const validatedAddress = getAddress(address);
+    
+    // modify
+    return NextResponse.json({ data: "something" });
 }
