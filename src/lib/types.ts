@@ -33,7 +33,7 @@ export type WalletRecap = {
     nftCount: number,
     gasSpent: Record<string, GasSpent>,
     nameplates: string[],
-    transactionByChain: Record<string, number> 
+    transactionsByChain: Record<string, number> 
 }
 
 export type SwapSafeTokenInformation = {
