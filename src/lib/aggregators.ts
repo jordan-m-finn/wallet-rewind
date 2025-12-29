@@ -73,10 +73,10 @@ export function countUniqueContracts(transactions: Transaction[]): number {
 }
 
 export function countNFTTransfers(transactions: Transaction[]): number {
-    const count = 0;
+    let count = 0;
 
     for (const txn of transactions) {
-        count = (!txn.isNFTTransfer ?? 0) + 1;
+        if (txn.isNFTTransfer) count ++;
     }
 
     return count;
