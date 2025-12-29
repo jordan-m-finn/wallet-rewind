@@ -78,8 +78,6 @@ export function countNFTTransfers(transactions: Transaction[]): number {
 }
 
 export function calculateTotalGasSpent(transactions: Transaction[]): Record<string, GasSpent> { 
-// transactions.gasSpent will return a structure:
-// { native: number, usd: number }
 
     const spent: Record<string, GasSpent> = {};
 
