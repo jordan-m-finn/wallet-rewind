@@ -122,22 +122,21 @@ export function assignNameplates(stats: RecapStats): string[] {
     }
 
     // 2. Count active chains
-    const activeChains = Object.keys(stats.transactionByChain).filter(
-        chain => stats.transactionByChain[chain] > 0
+    const activeChains = Object.keys(stats.transactionsByChain).filter(
+        chain => stats.transactionsByChain[chain] > 0
     ).length;
 
     // 3. Compute DeFi transactions
-    const defiChains = keyof typeof SUPPORTED_CHAINS;
-    let defiTxCount = 0;
+    let totalTransactions = 0;
 
-    for (const chain of defiChains) {
-        defiTxCount += stats.transactionByChain[chain] ?? 0;
+    for (const chain of stats.transactionsByChains) {
+        totalTransactions += stats.transactionsByChain[chain] ?? 0;
     }
 
     // ============ ASSIGN NAMEPLATES =========== //
 
     // Gas Guzzler
-    if (totalGasUsd > 100) nameplates.push("GasGuzzler");
+    if (totalGasUsd > 500) nameplates.push("Gas Guzzler");
 
     // NFT Collector
     if (stats.nftCount > 10) nameplates.push("NFT Collector");
@@ -146,7 +145,7 @@ export function assignNameplates(stats: RecapStats): string[] {
     if (activeChains >= 3) nameplates.push("Chain Hopper");
 
     // DeFi Degen
-    if (defiTxCount >= 50) nameplates.push("DeFi Degen");
+    if (totalTransactions >= 100) nameplates.push("DeFi Degen");
 
     // Sort by priority
     nameplates.sort(
