@@ -1,6 +1,5 @@
-import { Transaction, MostTransactedToken, GasSpent } from './types'
+import { Transaction, MostTransactedToken, GasSpent, RecapStats } from './types'
 // Functions needed:
-// calculateTotalGasSpent()
 // assignNameplates()
 
 export function countTransactionsByChain(transactions: Transaction[]): Record<string, number> {
@@ -95,4 +94,21 @@ export function calculateTotalGasSpent(transactions: Transaction[]): Record<stri
     return spent;
 }
 
+export function assignNameplates(stats: RecapStats): string[] {
+// MVP Nameplates (subject to change):
+    // "DeFi Degen" ~ High txn count on DeFi chains
+    // "NFT Collector" ~ High NFT transfer count
+    // "Gas Guzzler" ~ Spent a lot on gas
+    // "Chain Hopper" ~ Active on many different chains
+    // (Post-MVP) "Diamond Hands" ~ Per token where the user has never sold and only ever bought more of (holding, not trading)
+
+    // Delete later
+    const NAMEPLATE_PRIORITY = ["Gas Guzzler", "NFT Collector", "Chain Hopper", "DeFi Degen"];
+    
+    // 1. Derive totals (total txns, chains used, total gas USD)
+    // 2. Check each nameplate criteria
+    // 3. Return sorted by priority (primary first)
+    
+
+}
 
