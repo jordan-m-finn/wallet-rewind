@@ -38,7 +38,8 @@ export async function getTransactions(
 ): Promise<Transaction[]> {
     const apiKey = process.env.COVALENT_API_KEY;
     if (!apiKey) throw new Error("Missing Covalent API key");
-
+    
+    // LATER: Revisit and make secure so that API keys are never exposed
     const baseUrl = `https://api.covalenthq.com/v1/${chainSlug}/address/${address}/transactions_v3/`;
     let nextUrl: string | null = baseUrl;
 
