@@ -129,7 +129,7 @@ export function assignNameplates(stats: RecapStats): string[] {
     // 3. Compute DeFi transactions
     let totalTransactions = 0;
 
-    for (const chain of stats.transactionsByChains) {
+    for (const chain in stats.transactionsByChain) {
         totalTransactions += stats.transactionsByChain[chain] ?? 0;
     }
 
