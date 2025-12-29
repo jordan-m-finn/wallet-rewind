@@ -102,7 +102,6 @@ export function assignNameplates(stats: RecapStats): string[] {
     // "Chain Hopper" ~ Active on many different chains
     // (Post-MVP) "Diamond Hands" ~ Per token where the user has never sold and only ever bought more of (holding, not trading)
 
-    // Delete later
     const NAMEPLATE_PRIORITY = [
         "Gas Guzzler",
         "NFT Collector",
@@ -110,9 +109,6 @@ export function assignNameplates(stats: RecapStats): string[] {
         "DeFi Degen"
     ];
     
-    // 1. Derive totals (total txns, chains used, total gas USD)
-    // 2. Check each nameplate criteria
-    // 3. Return sorted by priority (primary first)
     const nameplates: string[] = [];
 
     // 1. Compute total gas spent (USD)
