@@ -57,3 +57,9 @@ export type Transaction = {
     // Needed in order to filer by year
     block_signed_at: string
 }
+
+export type RecapStats = {
+    transactionsByChain: Record<string, number>;
+    nftCount: number,
+    gasSpent: Record<string, GasSpent>;
+}
