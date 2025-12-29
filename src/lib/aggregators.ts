@@ -80,11 +80,20 @@ export function countNFTTransfers(transactions: Transaction[]): number {
 export function calculateTotalGasSpent(transactions: Transaction[]): Record<string, GasSpent> { 
 // transactions.gasSpent will return a structure:
 // { native: number, usd: number }
-//
-// So maybe we:
-//  1. make a list of the chain_names from SUPPORTED_CHAINS
-//  2. match each transactions chain_name with the GasSpent structure returned from the transaction
-//  3. build up a list of chain_names tied to their respective native and usd equivalent gas metrics
+
+    const spent: Record<string, number> = {};
+
+    for (const txn of transactions) {
+        const key = txn.chainName;
+        // How do I react to the first time seeing a chain (i.e. what do I initialize it to)?
+        spent[key] = (spent[key] ?? 0) + ({
+            spent[key].native + 0;
+            spent[key].usd + 0;
+            
+        });
+    }
+    
+    return spent;
 }
 
 
