@@ -81,16 +81,17 @@ export function calculateTotalGasSpent(transactions: Transaction[]): Record<stri
 // transactions.gasSpent will return a structure:
 // { native: number, usd: number }
 
-    const spent: Record<string, number> = {};
+    const spent: Record<string, GasSpent> = {};
 
     for (const txn of transactions) {
         const key = txn.chainName;
-        // How do I react to the first time seeing a chain (i.e. what do I initialize it to)?
-        spent[key] = (spent[key] ?? 0) + ({
-            spent[key].native + 0;
-            spent[key].usd + 0;
-            
-        });
+
+        if (!spent[key]) {
+            spent[key] = { native: 0, usd: 0 }
+        }
+
+        spent[key].native += txn.gasSpent.native;
+        spent[key].usd += txn.gasSpent.usd;
     }
     
     return spent;
