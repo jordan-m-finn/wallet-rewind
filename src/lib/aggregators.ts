@@ -72,4 +72,12 @@ export function countUniqueContracts(transactions: Transaction[]): number {
     // Covalent to return appropriate labels for known contracts
 }
 
+export function countNFTTransfers(transactions: Transaction[]): number {
+    const count = 0;
 
+    for (const txn of transactions) {
+        count = (!txn.isNFTTransfer ?? 0) + 1;
+    }
+
+    return count;
+}
