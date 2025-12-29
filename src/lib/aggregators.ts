@@ -1,3 +1,4 @@
+import { type Address } from 'viem'
 import { Transaction, MostTransactedToken, GasSpent, RecapStats } from './types'
 // Functions needed:
 // assignNameplates()
