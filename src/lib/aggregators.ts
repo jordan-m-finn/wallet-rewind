@@ -1,10 +1,5 @@
-import { Transaction, MostTransactedToken } from './types'
-// Goal: Take raw txns -> compute most transacted token, tx count, unique contracts interacted with
+import { Transaction, MostTransactedToken, GasSpent } from './types'
 // Functions needed:
-// countTransactionsByChain()
-// findMostTransactedToken()
-// countUniqueContracts()
-// countNFTTransfers()
 // calculateTotalGasSpent()
 // assignNameplates()
 
@@ -81,3 +76,15 @@ export function countNFTTransfers(transactions: Transaction[]): number {
 
     return count;
 }
+
+export function calculateTotalGasSpent(transactions: Transaction[]): Record<string, GasSpent> { 
+// transactions.gasSpent will return a structure:
+// { native: number, usd: number }
+//
+// So maybe we:
+//  1. make a list of the chain_names from SUPPORTED_CHAINS
+//  2. match each transactions chain_name with the GasSpent structure returned from the transaction
+//  3. build up a list of chain_names tied to their respective native and usd equivalent gas metrics
+}
+
+
