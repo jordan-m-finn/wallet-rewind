@@ -103,12 +103,55 @@ export function assignNameplates(stats: RecapStats): string[] {
     // (Post-MVP) "Diamond Hands" ~ Per token where the user has never sold and only ever bought more of (holding, not trading)
 
     // Delete later
-    const NAMEPLATE_PRIORITY = ["Gas Guzzler", "NFT Collector", "Chain Hopper", "DeFi Degen"];
+    const NAMEPLATE_PRIORITY = [
+        "Gas Guzzler",
+        "NFT Collector",
+        "Chain Hopper",
+        "DeFi Degen"
+    ];
     
     // 1. Derive totals (total txns, chains used, total gas USD)
     // 2. Check each nameplate criteria
     // 3. Return sorted by priority (primary first)
-    
+    const nameplates: string[] = [];
 
+    // 1. Compute total gas spent (USD)
+    let totalGasUsd = 0;
+    for (const chain in stats.gasSpent) {
+        totalGasUsd += stats.gasSpent[chain].usd;
+    }
+
+    // 2. Count active chains
+    const activeChains = Object.keys(stats.transactionByChain).filter(
+        chain => stats.transactionByChain[chain] > 0
+    ).length;
+
+    // 3. Compute DeFi transactions
+    const defiChains = keyof typeof SUPPORTED_CHAINS;
+    let defiTxCount = 0;
+
+    for (const chain of defiChains) {
+        defiTxCount += stats.transactionByChain[chain] ?? 0;
+    }
+
+    // ============ ASSIGN NAMEPLATES =========== //
+
+    // Gas Guzzler
+    if (totalGasUsd > 100) nameplates.push("GasGuzzler");
+
+    // NFT Collector
+    if (stats.nftCount > 10) nameplates.push("NFT Collector");
+
+    // Chain Hopper
+    if (activeChains >= 3) nameplates.push("Chain Hopper");
+
+    // DeFi Degen
+    if (defiTxCount >= 50) nameplates.push("DeFi Degen");
+
+    // Sort by priority
+    nameplates.sort(
+        (a, b) => NAMEPLATE_PRIORITY.indexOf(a) - NAMEPLATE_PRIORITY.indexOf(b)
+    );
+
+    return nameplates;
 }
-
