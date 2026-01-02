@@ -23,6 +23,7 @@ export async function GET(
     // 5. Build and return WalletRecap
     
     const validatedAddress = getAddress(address);
+    const currentYear = request.nextUrl.searchParams(); // verify
     
     // modify
     return NextResponse.json({ data: "something" });
