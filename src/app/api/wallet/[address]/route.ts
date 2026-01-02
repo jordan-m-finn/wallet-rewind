@@ -21,11 +21,19 @@ export async function GET(
     // 5. Build and return WalletRecap
     
     // 1. Validate address
-    const validatedAddress = getAddress(params.address);
+    let validatedAddress;
+    try {
+        validatedAddress = getAddress(params.address);
+    } catch {
+        return NextResponse.json(
+            { error: "Invalid address" },
+            { status: 400 }
+        );
+    }
 
     // 2. Get year from query params (default to current year)
     const yearParam = request.nextUrl.searchParams.get("year");
-    const year = yearParam ? parseInt(yearParam, 10) : new Date.getFullYear();
+    const year = yearParam ? parseInt(yearParam, 10) : new Date().getFullYear();
     
     // modify
     return NextResponse.json({ data: "something" });
