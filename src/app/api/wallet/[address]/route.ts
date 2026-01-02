@@ -16,14 +16,16 @@ export async function GET(
     request: NextRequest,
     { params }: { params: { address: string } }
 ) {
-    // 1. Validate address
-    // 2. Get year from query params (default to current year)
     // 3. Fetch transactions
     // 4. Run aggregators
     // 5. Build and return WalletRecap
     
-    const validatedAddress = getAddress(address);
-    const currentYear = request.nextUrl.searchParams(); // verify
+    // 1. Validate address
+    const validatedAddress = getAddress(params.address);
+
+    // 2. Get year from query params (default to current year)
+    const yearParam = request.nextUrl.searchParams.get("year");
+    const year = yearParam ? parseInt(yearParam, 10) : new Date.getFullYear();
     
     // modify
     return NextResponse.json({ data: "something" });
