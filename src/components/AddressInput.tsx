@@ -20,7 +20,7 @@ export function AddressInput({ error }: { error?: string }) {
             <input
                 type="text"
                 value={address}
-                onChange=((e) => setAddress(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)}
                 placeHolder="Enter wallet address (0x...)"
             />
             <button type="submit">View Recap</button>

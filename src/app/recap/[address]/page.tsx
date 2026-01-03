@@ -19,6 +19,7 @@ export default async function RecapPage({
             <div>
                 <AddressInput error="Invalid wallet address" />
             </div>
+        )
     }
 
     const year = yearParam ? parseInt(yearParam, 10) : new Date().getFullYear(); 
