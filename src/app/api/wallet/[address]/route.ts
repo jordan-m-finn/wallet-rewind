@@ -21,7 +21,7 @@ export async function GET(
     // 1. Validate addressva
     let validatedAddress;
     try {
-        validatedAddress = getAddress(params.address);
+        validatedAddress = getAddress(address);
     } catch {
         return NextResponse.json(
             { error: "Invalid address" },
