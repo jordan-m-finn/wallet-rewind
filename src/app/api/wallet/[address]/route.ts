@@ -14,8 +14,10 @@ import { WalletRecap, Transaction, MostTransactedToken, GasSpent, RecapStats } f
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: { address: string } }
-) {   
+    { params }: { params: Promise<{ address: string }> }
+) {  
+    const { address } = await params;
+
     // 1. Validate addressva
     let validatedAddress;
     try {
