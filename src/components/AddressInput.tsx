@@ -10,7 +10,7 @@ export function AddressInput({ error }: { error?: string }) {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         if (address.trim()) {
-            router.push('/recap/${address.trim()}')
+            router.push(`/recap/${address.trim()}`)
         }
     }
 
