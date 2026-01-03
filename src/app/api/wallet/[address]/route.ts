@@ -10,7 +10,7 @@ import {
     calculateTotalGasSpent,
     assignNameplates
 } from '@/lib/aggregators'
-import { WalletRecap, Transaction } from '@/lib/types'
+import { WalletRecap, Transaction, MostTransactedToken, GasSpent } from '@/lib/types'
 
 export async function GET(
     request: NextRequest,
@@ -32,10 +32,23 @@ export async function GET(
     const year = yearParam ? parseInt(yearParam, 10) : new Date().getFullYear();
 
     // 3. Fetch transactions
-    let transactions: Transaction[] = getTransactionsAllChains(validatedAddress, year);
+    const transactions: Transaction[] = getTransactionsAllChains(validatedAddress, year);
 
     // 4. Run aggregators
-    
+    const transactionsByChain = countTransactionsByChain(transactions);
+    const mostTransactedToken = findMostTransactedToken(transactions);
+    const uniqueContractCount = countUniqueContracts(transactions);
+    const nftCount = countNFTTransfers(transactions);
+    const gasSpent = calculateTotalGasSpent(transactions);
+   
+    const stats: RecapStats = {
+        transactionsByChain,
+        nftCount,
+        gasSpent
+    }
+
+    const nameplates = assignNameplates(stats);
+
     // 5. Build and return WalletRecap
 
     // modify
