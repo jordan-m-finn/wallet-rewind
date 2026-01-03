@@ -1,4 +1,4 @@
-import { getAddress, type Address } from 'viem'
+import { type Address } from 'viem'
 import { getTransactionsAllChains } from './covalent'
 import {
     countTransactionsByChain,
@@ -8,7 +8,7 @@ import {
     calculateTotalGasSpent,
     assignNameplates
 } from './aggregators.ts'
-import { WalletRecap, RecapStats } from './types'
+import { WalletRecap, RecapStats, Transaction } from './types'
 
 export async function getWalletRecap(address: Address, year: number): Promise<WalletRecap> {
     // Fetch transactions
@@ -16,7 +16,7 @@ export async function getWalletRecap(address: Address, year: number): Promise<Wa
     // Build and return WalletRecap
     
     // 3. Fetch transactions
-    const transactions: Transaction[] = await getTransactionsAllChains(validatedAddress, year);
+    const transactions: Transaction[] = await getTransactionsAllChains(address, year);
 
     // 4. Run aggregators
     const transactionsByChain = countTransactionsByChain(transactions);
@@ -35,7 +35,7 @@ export async function getWalletRecap(address: Address, year: number): Promise<Wa
 
     // 5. Build and return WalletRecap
     const walletRecap: WalletRecap = {
-        address: validatedAddress,
+        address,
         year,
         topToken,
         uniqueContracts,
@@ -45,5 +45,5 @@ export async function getWalletRecap(address: Address, year: number): Promise<Wa
         transactionsByChain
     }
 
-    return NextResponse.json({ data: walletRecap });
+    return walletRecap;
 }
