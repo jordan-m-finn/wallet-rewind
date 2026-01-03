@@ -32,7 +32,7 @@ export async function GET(
     const year = yearParam ? parseInt(yearParam, 10) : new Date().getFullYear();
 
     // 3. Fetch transactions
-    const transactions: Transaction[] = getTransactionsAllChains(validatedAddress, year);
+    const transactions: Transaction[] = await getTransactionsAllChains(validatedAddress, year);
 
     // 4. Run aggregators
     const transactionsByChain = countTransactionsByChain(transactions);
@@ -51,10 +51,10 @@ export async function GET(
 
     // 5. Build and return WalletRecap
     const walletRecap: WalletRecap = {
-        validatedAddress,
+        address: validatedAddress,
         year,
-        mostTransactedToken,
-        uniqueContractCount,
+        topToken,
+        uniqueContracts,
         nftCount,
         gasSpent,
         nameplates,
