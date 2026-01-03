@@ -33,36 +33,5 @@ export async function GET(
     const yearParam = request.nextUrl.searchParams.get("year");
     const year = yearParam ? parseInt(yearParam, 10) : new Date().getFullYear();
 
-    // 3. Fetch transactions
-    const transactions: Transaction[] = await getTransactionsAllChains(validatedAddress, year);
-
-    // 4. Run aggregators
-    const transactionsByChain = countTransactionsByChain(transactions);
-    const topToken = findMostTransactedToken(transactions);
-    const uniqueContracts = countUniqueContracts(transactions);
-    const nftCount = countNFTTransfers(transactions);
-    const gasSpent = calculateTotalGasSpent(transactions);
-   
-    const stats: RecapStats = {
-        transactionsByChain,
-        nftCount,
-        gasSpent
-    }
-
-    const nameplates = assignNameplates(stats);
-
-    // 5. Build and return WalletRecap
-    const walletRecap: WalletRecap = {
-        address: validatedAddress,
-        year,
-        topToken,
-        uniqueContracts,
-        nftCount,
-        gasSpent,
-        nameplates,
-        transactionsByChain
-    }
-
-    // modify
     return NextResponse.json({ data: walletRecap });
 }
