@@ -28,7 +28,7 @@ export type GasSpent = {
 export type WalletRecap = {
     address: Address,
     year: number,
-    topToken: MostTransactedToken,
+    topToken: MostTransactedToken | null,
     uniqueContracts: number,
     nftCount: number,
     gasSpent: Record<string, GasSpent>,
