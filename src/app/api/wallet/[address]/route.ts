@@ -36,8 +36,8 @@ export async function GET(
 
     // 4. Run aggregators
     const transactionsByChain = countTransactionsByChain(transactions);
-    const mostTransactedToken = findMostTransactedToken(transactions);
-    const uniqueContractCount = countUniqueContracts(transactions);
+    const topToken = findMostTransactedToken(transactions);
+    const uniqueContracts = countUniqueContracts(transactions);
     const nftCount = countNFTTransfers(transactions);
     const gasSpent = calculateTotalGasSpent(transactions);
    
@@ -50,7 +50,17 @@ export async function GET(
     const nameplates = assignNameplates(stats);
 
     // 5. Build and return WalletRecap
+    const walletRecap: WalletRecap = {
+        validatedAddress,
+        year,
+        mostTransactedToken,
+        uniqueContractCount,
+        nftCount,
+        gasSpent,
+        nameplates,
+        transactionsByChain
+    }
 
     // modify
-    return NextResponse.json({ data: "something" });
+    return NextResponse.json({ data: walletRecap });
 }
