@@ -2,6 +2,9 @@ import { type Address } from 'viem'
 import { SUPPORTED_CHAINS, Transaction, SwapSafeTokenInformation } from './types.ts'
 
 function extractTokenInfo(logEvents: any[]): SwapSafeTokenInformation[] {
+    // Guard for transactions that don't have log_events
+    if (!logEvents || !Array.isArray(logEvents)) return [];
+
     const map = new Map<string, SwapSafeTokenInformation>();
 
     for (const log of logEvents) {
@@ -21,6 +24,9 @@ function extractTokenInfo(logEvents: any[]): SwapSafeTokenInformation[] {
 }
 
 function detectNFT(logEvents: any[]): boolean {
+    // Guard for transaction that don't have log_events
+    if (!logEvents || !Array.isArray(logEvents)) return false;
+
     for (const log of logEvents) {
         // check supports_erc array
         if (log.supports_erc?.includes("erc721") || log.supports_erc?.includes("erc1155")) {
