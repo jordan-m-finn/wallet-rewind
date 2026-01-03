@@ -13,8 +13,12 @@ function extractTokenInfo(logEvents: any[]): SwapSafeTokenInformation[] {
         const key = log.sender_address.toLowerCase();
 
         if (!map.has(key)) {
+            // Filter out unlabeled contracts
+            const symbol = log.sender_contract_ticker_symbol ?? log.sender_name;
+            if (!symbol) continue;
+
             map.set(key, {
-                token: log.sender_contract_ticker_symbol ?? log.sender_name ?? "UNKNOWN",
+                token: symbol,
                 contractAddress: log.sender_address
             });
         }
