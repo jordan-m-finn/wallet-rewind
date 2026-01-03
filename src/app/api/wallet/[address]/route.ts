@@ -10,7 +10,7 @@ import {
     calculateTotalGasSpent,
     assignNameplates
 } from '@/lib/aggregators'
-import { WalletRecap, Transaction, MostTransactedToken, GasSpent } from '@/lib/types'
+import { WalletRecap, Transaction, MostTransactedToken, GasSpent, RecapStats } from '@/lib/types'
 
 export async function GET(
     request: NextRequest,
