@@ -10,6 +10,7 @@ export default async function RecapPage({
     searchParams: Promise<{ year?: string }>
 }) {
     const { address } = await params;
+    const { year: yearParam } = await searchParams;
 
     let validatedAddress;
     try {
