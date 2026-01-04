@@ -22,24 +22,24 @@ export function AddressInput({ error }: { error?: string }) {
         }
     }
 
-    return (
-        <div>
-            {isConnected && (
-                <button onClick={handleViewMyRecap}>
-                    View My Recap
-                </button>
-            )}
+    if (isConnected) {
+        return (
+            <button onClick={handleViewMyRecap}>
+                View My Recap
+            </button>
+        )
+    }
 
-            <form onSubmit={handleSubmit}>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <input
-                    type="text"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    placeHolder="Enter wallet address (0x...)"
-                />
-                <button type="submit">View Recap</button>
-            </form>
-        </div>
+    return (
+        <form onSubmit={handleSubmit}>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <input
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                placeHolder="Enter wallet address (0x...)"
+            />
+            <button type="submit">View Recap</button>
+        </form>
     )
 }
