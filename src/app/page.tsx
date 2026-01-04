@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { AddressInput } from "../components/AddressInput.tsx";
 
 export default function Home() {
   return (
