@@ -27,7 +27,7 @@ export type GasSpent = {
 
 // WalletRecap
 export type WalletRecap = {
-    address: Address,
+    address: string,
     year: number,
     topToken: MostTransactedToken | null,
     uniqueContracts: number,
@@ -39,14 +39,14 @@ export type WalletRecap = {
 
 export type SwapSafeTokenInformation = {
     token: string,
-    contractAddress: Address
+    contractAddress: string
 }
 
 // Needed for extracting data from Covalent's transaction returns
 export type Transaction = {
     chainID: (typeof SUPPORTED_CHAINS)[keyof typeof SUPPORTED_CHAINS],
     chainName: keyof typeof SUPPORTED_CHAINS,
-    toAddress: Address,
+    toAddress: string,
     // Access the token info in the logs of the transaction response returned by Covalent in which
     //   items[i].log_events[j] contains sender_name, sender_contract_ticker_symbol, and sender_address (the token contract)
     //   to verify
