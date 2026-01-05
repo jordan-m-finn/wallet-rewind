@@ -1,7 +1,7 @@
 import { getAddress } from 'viem'
 import { getWalletRecap } from '@/lib/recap'
 import { AddressInput } from '@/components/AddressInput'
-import { isSolanaAddress } from '@/lib/address'
+import isSolanaAddress from '@/lib/address'
 
 export default async function RecapPage({
     params,
@@ -13,7 +13,7 @@ export default async function RecapPage({
     const { address } = await params;
     const { year: yearParam } = await searchParams;
 
-    let validatedAddress = string;
+    let validatedAddress: string;
     
     if (isSolanaAddress(address)) {
         validatedAddress = address;

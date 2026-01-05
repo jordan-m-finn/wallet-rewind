@@ -9,7 +9,7 @@ import {
     assignNameplates
 } from './aggregators.ts'
 import { WalletRecap, RecapStats, Transaction } from './types'
-import { isSolanaAddress } from './address'
+import isSolanaAddress from './address'
 
 export async function getWalletRecap(address: Address, year: number): Promise<WalletRecap> {
     // Fetch transactions
