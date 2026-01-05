@@ -1,5 +1,6 @@
 import { type Address } from 'viem'
 import { getTransactionsAllChains } from './covalent'
+import { getSolanaTransactions } from './helius.ts'
 import {
     countTransactionsByChain,
     findMostTransactedToken,
@@ -10,13 +11,27 @@ import {
 } from './aggregators.ts'
 import { WalletRecap, RecapStats, Transaction } from './types'
 
+function isSolanaAddress(address: string): boolean {
+    if (address.startsWith('0x')) return false;
+    if (address.length < 32 || address.length > 44) return false;
+
+    const base58Regex = /^[1-9A-HJ-NP-Za-km-z]+$/;
+    return base58Regex.test(address);
+}
+
 export async function getWalletRecap(address: Address, year: number): Promise<WalletRecap> {
     // Fetch transactions
     // Run aggregators
     // Build and return WalletRecap
     
-    // 3. Fetch transactions
-    const transactions: Transaction[] = await getTransactionsAllChains(address, year);
+    // 3. Fetch transactions based on address type
+    let transactions: Transaction[];
+
+    if (isSolanaAddress(address)) {
+        transactions = await getSolanaTransactions(address, year);
+    } else {
+        transactions = await getTransactionsAllChains(address, year);
+    }
 
     // 4. Run aggregators
     const transactionsByChain = countTransactionsByChain(transactions);
