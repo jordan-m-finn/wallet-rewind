@@ -51,5 +51,48 @@ export async function getSolanaTransactions(
 }
 
 function transformHeliusTransaction(item: any): Transaction {
-    // TODO: Implement mapping
+    const tokenInfo: SwapSafeTokenInformation[] = [];
+
+    if (item.tokenTransfers && Array.isArray(item.tokenTransfers)) {
+        const seen = new Set<string>();
+
+        for (const transfer of item.tokenTransfers) {
+            if (transfer.mint && !seen.has(transfer.mint)) {
+                seen.add(transfer.mint);
+                tokenInfo.push({
+                    // Mint address for now, not symbol (add lookup later)
+                    token: transfer.mint,
+                    contractAddress: transfer.mint
+                });
+            }
+        }
+    }
+
+    // Detect NFT transfer from events
+    const isNFT = !!item.events?.nft;
+
+    // Fee is in lamports (1 SOL = 1e9 lamports)
+    const gasSpentNative = item.fee / 1e9; 
+
+    // Extract "to" address - first recipient from transfers
+    let toAddress = '';
+    if (item.nativeTransfers?.length > 0) {
+        toAddress = item.nativeTransfers[0].toUserAccount ?? '';
+    } else if (item.tokenTransfers?.length > 0) {
+        toAddress = item.tokenTransfers[0].toUserAccount ?? '';
+    }
+
+    return {
+        chainID: 900,
+        chainName: "solana-mainnet",
+        toAddress,
+        token: tokenInfo,
+        isNFTTransfer: isNFT,
+        gasSpent: {
+            native: gasSpentNative,
+            // Not available from Helius without price lookup
+            usd: 0
+        },
+        block_signed_at: new Date(item.timestamp * 1000).toISOString()
+    };
 }
