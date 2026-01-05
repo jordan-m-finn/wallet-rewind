@@ -1,6 +1,7 @@
 import { getAddress } from 'viem'
 import { getWalletRecap } from '@/lib/recap'
 import { AddressInput } from '@/components/AddressInput'
+import { isSolanaAddress } from '@/lib/address'
 
 export default async function RecapPage({
     params,
