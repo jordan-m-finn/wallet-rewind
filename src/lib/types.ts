@@ -11,6 +11,7 @@ export const SUPPORTED_CHAINS = {
     "bnb": 56,
     "zkSync-Era": 324,
     "arbitrum-mainnet": 42161,
+    "solana-mainnet": 900,
 } as const
 
 // Aggregator function return types
