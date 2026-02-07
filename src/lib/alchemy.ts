@@ -128,3 +128,46 @@ async function getTransfersForChain(
 
     return combined;
 }
+
+async function fetchGasForTransactions(
+    baseUrl: string,
+    apiKey: string,
+    txHashes: string[]
+): Promise<Map<string, { gasUsed: bigint; gasPrice: bigint }>> {
+    const url = `${baseUrl}/${apiKey}`;
+    const gasMap = new Map<string, { gasUsed: bigint; gasPrice: bigint }>();
+
+    if (txHashes.length === 0) return gasMap;
+
+    // batch requests in groups of 100 to avoid rate limits
+    const BATCH_SIZE = 100;
+
+    for (let i = 0; i < txHashes.length; i += BATCH_SIZE) {
+        const batch = txHashes.slice(i, i + BATCH_SIZE);
+
+        const batchRequest = batch.map((hash, index) => ({
+            jsonrpc = "2.0",
+            id: index,
+            method: "eth_getTransactionReceipt",
+            params: [hash]
+        }));
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' };
+            body: JSON.stringify(batchRequest);
+        });
+
+        for (const result of results) {
+            if (result.result) {
+                const receipt = result.result;
+                gasMap.set(receipt.transactionHash, {
+                    gasUsed: BigInt(receipt.gasUsed),
+                    gasPrice: BigInt(receipt.effectiveGasPrice || receipt.gasPrice || '0')
+                });
+            }
+        }
+    }
+
+    return gasMap;
+}
