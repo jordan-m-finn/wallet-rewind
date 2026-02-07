@@ -97,3 +97,34 @@ async function fetchTransfers(
 
     return allTransfers;
 }
+
+async function getTransfersForChain(
+    chainSlug: keyof typeof SUPPORTED_CHAINS,
+    address: string,
+    year: number
+): Promise<any[]> {
+    const apiKey = process.env.ALCHEMY_API_KEY;
+    if (!apiKey) throw new Error("Missing Alchemy API key");
+
+    const baseUrl = ALCHEMY_ENDPOINTS[chainSlug];
+    if (!baseUrl) return [];
+
+    // fetch both directions
+    const [fromTransfers, toTransfers] = await Promise.all([
+        fetchTransfers(baseUrl, apiKey, address, 'from', year),
+        fetchTransfers(baseUrl, apiKey, address, 'to', year)
+    ]);
+
+    // deduplicate by uniqueId
+    const seen = new Set<string>();
+    const combined: any[] = [];
+
+    for (const transfer of [...fromTransfers, ...toTransfers]) {
+        if (!seen.has(transfer.uniqueId)) {
+            seen.add(transfer.uniqueId);
+            combined.push(transfer);
+        }
+    }
+
+    return combined;
+}
