@@ -66,6 +66,10 @@ export async function getTransactions(
             }
         });
         const response = await covalentResponse.json();
+
+        // logging (delete later)
+        console.log('Covalent response status:', covalentResponse.status);
+        console.log('Covalent response data:', JSON.stringify(response, null, 2).slice(0, 500));
         
         // Since these are unique at the response level and not the item level, we'll capture them here
         const data = response.data;
