@@ -1,4 +1,5 @@
 import { getTransactionsAllChains } from './covalent'
+import { getTransactionsAlchemy } from './alchemy'
 import { getSolanaTransactions } from './helius.ts'
 import {
     countTransactionsByChain,
@@ -11,21 +12,43 @@ import {
 import { WalletRecap, RecapStats, Transaction } from './types'
 import isSolanaAddress from './address'
 
-export async function getWalletRecap(address: Address, year: number): Promise<WalletRecap> {
-    // Fetch transactions
-    // Run aggregators
-    // Build and return WalletRecap
+async function getEVMTransactions(address: string, year: number): Promise<Transaction[]> {
+    // try alchemy first
+    try {
+        console.log('Attempting Alchemy...');
+        const transactions = await getTransactionsAlchemy(address, year);
+        console.log(`Alchemy succeeded: ${transactions.length} transactions`);
+        return transactions;
+    } catch (error) {
+        console.error('Alchemy failed:', error);
+    }
     
-    // 3. Fetch transactions based on address type
+    // fall back to Covalent
+    try {
+        console.log('Falling back to Covalent...');
+        const transactions = await getTransactionsAllChains(address, year);
+        console.log(`Covalent succeeded: ${transactions.length} transactions`);
+        return transactions;
+    } catch (error) {
+        console.error('Covalent failed:', error);
+    }
+
+    // both failed - throw error to propagate to UI
+    throw new Error('Unable to fetch transaction data. Please try again later.');
+}
+
+export async function getWalletRecap(address: Address, year: number): Promise<WalletRecap> {
+    
+    // Fetch transactions based on address type
     let transactions: Transaction[];
 
     if (isSolanaAddress(address)) {
         transactions = await getSolanaTransactions(address, year);
     } else {
-        transactions = await getTransactionsAllChains(address, year);
+        transactions = await getEVMTransactions(address, year);
     }
 
-    // 4. Run aggregators
+    //Run aggregators
     const transactionsByChain = countTransactionsByChain(transactions);
     const topToken = findMostTransactedToken(transactions);
     const uniqueContracts = countUniqueContracts(transactions);
@@ -40,7 +63,7 @@ export async function getWalletRecap(address: Address, year: number): Promise<Wa
 
     const nameplates = assignNameplates(stats);
 
-    // 5. Build and return WalletRecap
+    // Build and return WalletRecap
     const walletRecap: WalletRecap = {
         address,
         year,
