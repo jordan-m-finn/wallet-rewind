@@ -114,7 +114,9 @@ export function Hero() {
                       );
                     }}
                   </ConnectButton.Custom>
-
+                <button className="bg-red-500 p-8 text-white text-2xl">
+                    TEST
+                </button>
                   <button
                     onClick={() => setShowManualInput(true)}
                     className="text-sm text-zinc-500 hover:text-white transition-colors underline underline-offset-4"
