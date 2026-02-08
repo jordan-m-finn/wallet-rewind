@@ -1,5 +1,39 @@
 import { SUPPORTED_CHAINS, Transaction, SwapSafeTokenInformation } from './types'
 
+// fetch token metadata for a list of mint addresses
+async function getTokenMetadata(mints: string[], apiKey: string): Promise<Map<string, string>> {
+    const mintToSymbol = new Map<string, string>();
+
+    if (mints.length === 0) return mintToSymbol;
+
+    const rpcUrl = `https://mainnet.helius-rpc.com/?api-key=${apiKey}`;
+    
+    const response = await fetch(rpcUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            jsonrpc: '2.0',
+            id: 'token-metadata',
+            method: 'getAssetBatch',
+            params: {
+                ids: mints
+            }
+        })
+    });
+
+    const data = await response.json();
+
+    if (data.result) {
+        for (const asset of data.result) {
+            if (asset?.id && asset?.content?.metadata?.symbol) {
+                mintToSymbol.set(asset.id, asset.content.metadata.symbol);
+            }
+        }
+    }
+
+    return mintToSymbol;
+}
+
 export async function getSolanaTransactions(
     address: string,
     year: number
@@ -45,6 +79,28 @@ export async function getSolanaTransactions(
 
         // Set up pagination - use last transaction's signature
         beforeSignature = items[items.length - 1]?.signature ?? null;
+    }
+
+    // collect unique mints from all transactions
+    const uniqueMints = new Set<string>();
+    for (const tx of transactions) {
+        for (const tokenInfo of tx.token) {
+            uniqueMints.add(tokenInfo.contractAddress);
+        }
+    }
+
+    // fetch token metadata and update symbols
+    if (uniqueMints.size > 0) {
+        const mintToSymbol = await getTokenMetadata(Array.from(uniqueMints), apiKey);
+        
+        for (const tx of transactions) {
+            for (const tokenInfo of tx.token) {
+                const symbol = mintToSymbol.get(tokenInfo.contractAddress);
+                if (symbol) {
+                    tokenInfo.token = symbol;
+                }
+            }
+        }
     }
     
     return transactions;
@@ -96,3 +152,4 @@ function transformHeliusTransaction(item: any): Transaction {
         block_signed_at: new Date(item.timestamp * 1000).toISOString()
     };
 }
+
