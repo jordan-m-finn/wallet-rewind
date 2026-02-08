@@ -99,16 +99,11 @@ async function fetchTransfers(
 }
 
 async function getTransfersForChain(
-    chainSlug: keyof typeof SUPPORTED_CHAINS,
+    baseUrl: string,
+    apiKey: string,
     address: string,
     year: number
 ): Promise<any[]> {
-    const apiKey = process.env.ALCHEMY_API_KEY;
-    if (!apiKey) throw new Error("Missing Alchemy API key");
-
-    const baseUrl = ALCHEMY_ENDPOINTS[chainSlug];
-    if (!baseUrl) return [];
-
     // fetch both directions
     const [fromTransfers, toTransfers] = await Promise.all([
         fetchTransfers(baseUrl, apiKey, address, 'from', year),
@@ -243,4 +238,34 @@ function transformAlchemyTransfers(
     }
 
     return transactions;
+}
+
+export async function getTransactionsAlchemy(
+    address: string,
+    year: number
+): Promise<Transaction[]> {
+    const apiKey = process.env.ALCHEMY_API_KEY;
+    if (!apiKey) throw new Error("Missing Alchemy API key");
+
+    const results = await Promise.all(
+        ALCHEMY_SUPPORTED_CHAINS.map(async (chainSlug) => {
+            const baseUrl = ALCHEMY_ENDPOINTS[chainSlug];
+            if (!baseUrl) return [];
+
+            // 1. fetch transfers for this chain
+            const transfers = await getTransfersForChain(baseUrl, apiKey, address, year);
+            if (transfers.length === 0) return [];
+
+            // 2. get unique transaction txHashes
+            const uniqueHashes = [...new Set(transfers.map(t => t.hash))];
+
+            // 3. fetch gas data for all transactions
+            const gasMap = await fetchGasForTransactions(baseUrl, apiKey, uniqueHashes);
+
+            // 4. transform to transaction type
+            return transformAlchemyTransfers(transfers, gasMap, chainSlug);
+        })
+    );
+
+    return results.flat();
 }
