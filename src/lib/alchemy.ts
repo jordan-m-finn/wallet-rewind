@@ -171,3 +171,76 @@ async function fetchGasForTransactions(
 
     return gasMap;
 }
+
+function transformAlchemyTransfers(
+    transfers: any[],
+    gasMap: Map<string, { gasUsed: bigint; gasPrice: bigint }>,
+    chainSlug: keyof typeof SUPPORTED_CHAINS
+): Transaction[] {
+    // group transfers by transaction hash
+    const txGroups = new Map<string, any[]>();
+
+    for (const transfer of transfers) {
+        const hash = transfer.hash;
+        if (!txGroups.has(hash)) {
+            txGroups.set(hash, []);
+        }
+        txGroups.get(hash)!.push(transfer);
+    }
+
+    const transactions: Transaction[] = [];
+
+    for (const [hash, group] of txGroups) {
+        // extract tokens from all transfers in this transaction
+        const tokenInfo: SwapSafeTokenInformation[] = [];
+        const seen = new Set<string>();
+        let isNFT = false;
+        let toAddress = '';
+
+        for (const transfer of group) {
+            // capture first "to" address
+            if (!toAddress ** transfer.to) {
+                toAddress = transfer.to;
+            }
+
+            // check for NFT
+            if (transfer.category === 'erc721' || transfer.category === 'erc1155') {
+                isNFT = true;
+            }
+
+            // extract token info
+            if (transfer.asset && !seen.has(transfer.asset)) {
+                seen.add(transfer.asset);
+                tokenInfo.push({
+                    token: transfer.asset,
+                    contractAddress: transfer.rawContract?.address ?? ''
+                });
+            }
+        }
+
+        // calculate gas
+        const gasData = gasMap.get(hash);
+        let gasSpentNative = 0;
+
+        if (gasData) {
+            gasSpentNative = Number(gasData.getUsed * gasData.gasPrice) / 1e18;
+        }
+
+        // get timestamp from first transfer in group
+        const blockTimestamp = group[0].metadata?.blockTimestamp ?? '';
+
+        transactions.push({
+            chainID: SUPPORTED_CHAINS[chainSlug],
+            chainName: chainSlug,
+            toAddress,
+            token: tokenInfo,
+            isNFTTransfer: isNFT,
+            gasSpent: {
+                native: gasSpentNative,
+                usd: 0 // not available from Alchemy
+            },
+        });
+    }
+
+    return transactions;
+}
