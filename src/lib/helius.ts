@@ -124,6 +124,16 @@ function transformHeliusTransaction(item: any): Transaction {
         }
     }
 
+    if (item.nativeTransfers?.length > 0) {
+        const solMint = 'So11111111111111111111111111111111111111112';
+        if (!tokenInfo.some(t => t.contractAddress === solMint)) {
+            tokenInfo.push({
+                token: 'SOL',
+                contractAddress: solMint
+            });
+        }
+    }
+
     // Detect NFT transfer from events
     const isNFT = !!item.events?.nft;
 
