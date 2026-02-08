@@ -9,6 +9,7 @@ import {
     calculateTotalGasSpent,
     assignNameplates
 } from './aggregators.ts'
+import { getNativeTokenPrices } from './prices.ts'
 import { WalletRecap, RecapStats, Transaction } from './types'
 import isSolanaAddress from './address'
 
@@ -55,6 +56,13 @@ export async function getWalletRecap(address: Address, year: number): Promise<Wa
     const nftCount = countNFTTransfers(transactions);
     const gasSpent = calculateTotalGasSpent(transactions);
    
+    // Fetch prices and calculate USD values
+    const prices = await getNativeTokenPrices();
+    for (const chain of Object.keys(gasSpent)) {
+        const price = prices[chain] ?? 0;
+        gasSpent[chain].usd = gasSpent[chain].native * price;
+    }
+
     const stats: RecapStats = {
         transactionsByChain,
         nftCount,
@@ -73,7 +81,7 @@ export async function getWalletRecap(address: Address, year: number): Promise<Wa
         gasSpent,
         nameplates,
         transactionsByChain
-    }
+    };
 
     return walletRecap;
 }
