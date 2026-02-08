@@ -141,7 +141,7 @@ async function fetchGasForTransactions(
         const batch = txHashes.slice(i, i + BATCH_SIZE);
 
         const batchRequest = batch.map((hash, index) => ({
-            jsonrpc = "2.0",
+            jsonrpc: "2.0",
             id: index,
             method: "eth_getTransactionReceipt",
             params: [hash]
