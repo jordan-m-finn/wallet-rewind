@@ -194,7 +194,7 @@ function transformAlchemyTransfers(
 
         for (const transfer of group) {
             // capture first "to" address
-            if (!toAddress ** transfer.to) {
+            if (!toAddress && transfer.to) {
                 toAddress = transfer.to;
             }
 
