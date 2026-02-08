@@ -1,26 +1,433 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* 
+     * WalletRewind Design System
+     * Inspired by: Gemini (trust + innovation), Robinhood (minimalism), Spotify Wrapped (bold moments)
+     */
+
+    /* ===== CORE PALETTE ===== */
+    /* Gemini-inspired: near-black base, cyan accent */
+    --color-black: 0 0% 2%;           /* #050505 - primary background */
+    --color-void: 220 15% 6%;         /* #0d0f12 - card/elevated surfaces */
+    --color-slate: 220 10% 12%;       /* #1a1c20 - borders, subtle backgrounds */
+    --color-muted: 220 8% 40%;        /* #5f6368 - muted text */
+    --color-soft: 220 8% 65%;         /* #9ca3af - secondary text */
+    --color-white: 0 0% 98%;          /* #fafafa - primary text */
+    
+    /* Accent: Gemini Cyan */
+    --color-cyan: 187 100% 49%;       /* #00DCFA - primary accent */
+    --color-cyan-dim: 187 80% 40%;    /* #148a9c - hover states */
+    --color-cyan-glow: 187 100% 60%;  /* #33e4ff - glows, highlights */
+
+    /* Recap Slide Gradients (Spotify Wrapped energy) */
+    --gradient-purple: 270 80% 60%;   /* #a855f7 */
+    --gradient-blue: 220 90% 60%;     /* #3b82f6 */
+    --gradient-teal: 175 80% 45%;     /* #14b8a6 */
+    --gradient-orange: 25 95% 55%;    /* #f97316 - Gemini internal orange */
+
+    /* Semantic Status Colors */
+    --color-success: 160 84% 39%;     /* #10b981 - green */
+    --color-warning: 45 93% 47%;      /* #eab308 - yellow */
+    --color-error: 0 84% 60%;         /* #ef4444 - red */
+
+    /* ===== SEMANTIC TOKENS ===== */
+    --background: var(--color-black);
+    --foreground: var(--color-white);
+    
+    --card: var(--color-void);
+    --card-foreground: var(--color-white);
+    
+    --popover: var(--color-void);
+    --popover-foreground: var(--color-white);
+    
+    --primary: var(--color-cyan);
+    --primary-foreground: var(--color-black);
+    
+    --secondary: var(--color-slate);
+    --secondary-foreground: var(--color-soft);
+    
+    --muted: var(--color-slate);
+    --muted-foreground: var(--color-muted);
+    
+    --accent: var(--color-cyan);
+    --accent-foreground: var(--color-black);
+    
+    --destructive: var(--color-error);
+    --destructive-foreground: var(--color-white);
+    
+    --border: var(--color-slate);
+    --input: var(--color-slate);
+    --ring: var(--color-cyan);
+
+    /* ===== TYPOGRAPHY ===== */
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    
+    /* Type Scale (Robinhood-inspired: generous, readable) */
+    --text-xs: 0.75rem;     /* 12px */
+    --text-sm: 0.875rem;    /* 14px */
+    --text-base: 1rem;      /* 16px */
+    --text-lg: 1.125rem;    /* 18px */
+    --text-xl: 1.25rem;     /* 20px */
+    --text-2xl: 1.5rem;     /* 24px */
+    --text-3xl: 1.875rem;   /* 30px */
+    --text-4xl: 2.25rem;    /* 36px */
+    --text-5xl: 3rem;       /* 48px */
+    --text-6xl: 3.75rem;    /* 60px */
+    --text-7xl: 4.5rem;     /* 72px - hero headlines */
+
+    /* ===== SPACING ===== */
+    /* Robinhood uses generous whitespace - we follow suit */
+    --space-page: 6rem;     /* page-level vertical rhythm */
+    --space-section: 4rem;  /* between major sections */
+    --space-block: 2rem;    /* between content blocks */
+    --space-element: 1rem;  /* between related elements */
+
+    /* ===== EFFECTS ===== */
+    --radius-sm: 0.375rem;  /* 6px - buttons, inputs */
+    --radius-md: 0.75rem;   /* 12px - cards */
+    --radius-lg: 1rem;      /* 16px - modals, large cards */
+    --radius-xl: 1.5rem;    /* 24px - recap slides */
+    --radius-full: 9999px;  /* pills, avatars */
+
+    /* Shadows (subtle, dark-mode appropriate) */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+    --shadow-glow: 0 0 20px rgb(0 220 250 / 0.15);
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 200ms ease;
+    --transition-slow: 300ms ease;
+  }
+
+  /* Light mode override (optional - keep dark as default for crypto aesthetic) */
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 220 15% 10%;
+    --card: 0 0% 98%;
+    --card-foreground: 220 15% 10%;
+    --muted: 220 10% 92%;
+    --muted-foreground: 220 8% 40%;
+    --border: 220 10% 88%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Smooth scrolling for single-page experience */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Selection styling */
+  ::selection {
+    background-color: hsl(var(--color-cyan) / 0.3);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  /* ===== RECAP SLIDE GRADIENTS ===== */
+  /* These are the "Wrapped" moments - bold, memorable */
+  
+  .gradient-hero {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--gradient-purple)) 0%,
+      hsl(var(--gradient-blue)) 50%,
+      hsl(var(--color-cyan)) 100%
+    );
+  }
+
+  .gradient-transactions {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--color-cyan)) 0%,
+      hsl(var(--gradient-teal)) 100%
+    );
+  }
+
+  .gradient-gas {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--gradient-orange)) 0%,
+      hsl(25 95% 45%) 100%
+    );
+  }
+
+  .gradient-nft {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--gradient-purple)) 0%,
+      hsl(300 80% 50%) 100%
+    );
+  }
+
+  .gradient-chains {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--gradient-blue)) 0%,
+      hsl(var(--color-cyan)) 100%
+    );
+  }
+
+  /* Gradient text utility */
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--color-cyan)) 0%,
+      hsl(var(--gradient-blue)) 50%,
+      hsl(var(--gradient-purple)) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ===== GLASS MORPHISM (for overlays, cards) ===== */
+  .glass {
+    background: hsl(var(--color-void) / 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  /* ===== GLOW EFFECTS ===== */
+  .glow-cyan {
+    box-shadow: 
+      0 0 20px hsl(var(--color-cyan) / 0.2),
+      0 0 40px hsl(var(--color-cyan) / 0.1);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 30px hsl(var(--color-cyan) / 0.5);
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-up {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(var(--color-cyan) / 0.2);
+    }
+    50% { 
+      box-shadow: 0 0 40px hsl(var(--color-cyan) / 0.4);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes count-up {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .animate-fade-in { animation: fade-in 0.5s ease forwards; }
+  .animate-slide-up { animation: slide-up 0.6s ease forwards; }
+  .animate-slide-in-right { animation: slide-in-right 0.6s ease forwards; }
+  .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+  .animate-float { animation: float 3s ease-in-out infinite; }
+  .animate-count-up { animation: count-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+  /* Stagger delays for sequential animations */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+
+  /* ===== RECAP SLIDE BASE ===== */
+  .recap-slide {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-section);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ===== BUTTON VARIANTS ===== */
+  .btn-primary {
+    background-color: hsl(var(--color-cyan));
+    color: hsl(var(--color-black));
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-base);
+  }
+
+  .btn-primary:hover {
+    background-color: hsl(var(--color-cyan-dim));
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid hsl(var(--border));
+    transition: all var(--transition-base);
+  }
+
+  .btn-secondary:hover {
+    background-color: hsl(var(--secondary));
+    border-color: hsl(var(--color-cyan) / 0.5);
+  }
+
+  /* ===== CARD STYLES ===== */
+  .card-base {
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius-md);
+    padding: var(--space-block);
+  }
+
+  .card-interactive {
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius-md);
+    padding: var(--space-block);
+    transition: all var(--transition-base);
+  }
+
+  .card-interactive:hover {
+    border-color: hsl(var(--color-cyan) / 0.5);
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* ===== STAT DISPLAY ===== */
+  .stat-value {
+    font-size: var(--text-5xl);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: var(--text-sm);
+    color: hsl(var(--muted-foreground));
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+  }
+
+  /* ===== NAMEPLATE BADGE ===== */
+  .nameplate {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    background: hsl(var(--color-void));
+    border: 1px solid hsl(var(--border));
+  }
+
+  .nameplate-glow {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--color-cyan) / 0.2) 0%,
+      hsl(var(--gradient-purple) / 0.2) 100%
+    );
+    border-color: hsl(var(--color-cyan) / 0.5);
+    box-shadow: 0 0 20px hsl(var(--color-cyan) / 0.1);
+  }
+}
+
+@layer utilities {
+  /* Container with max-width for content */
+  .container-tight {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .container-wide {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  /* Text balance for headlines */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Focus visible for accessibility */
+  .focus-ring {
+    outline: none;
+  }
+  .focus-ring:focus-visible {
+    outline: 2px solid hsl(var(--color-cyan));
+    outline-offset: 2px;
+  }
 }
