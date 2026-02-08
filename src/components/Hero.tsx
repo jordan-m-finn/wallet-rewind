@@ -29,62 +29,73 @@ export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-background">
-        {/* Subtle radial gradient */}
+      <div className="absolute inset-0 bg-[#050505]">
+        {/* Subtle radial gradient from top */}
         <div
-          className="absolute inset-0 opacity-40"
+          className="absolute inset-0 opacity-50"
           style={{
             background:
-              "radial-gradient(ellipse 80% 50% at 50% -20%, hsl(187 100% 49% / 0.15), transparent)",
+              "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,220,250,0.15), transparent)",
           }}
         />
       </div>
 
-      {/* Floating orbs (subtle, Gemini-style) */}
+      {/* Floating orbs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-40 top-1/4 h-80 w-80 rounded-full bg-primary opacity-[0.03] blur-[100px] animate-float" />
+        <div 
+          className="absolute -left-40 top-1/4 h-96 w-96 rounded-full bg-cyan-500/5 blur-[120px]"
+          style={{ animation: "float 6s ease-in-out infinite" }}
+        />
         <div
-          className="absolute -right-40 top-2/3 h-64 w-64 rounded-full bg-primary opacity-[0.03] blur-[80px] animate-float"
-          style={{ animationDelay: "1s" }}
+          className="absolute -right-40 top-2/3 h-72 w-72 rounded-full bg-cyan-500/5 blur-[100px]"
+          style={{ animation: "float 6s ease-in-out infinite", animationDelay: "2s" }}
         />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container-tight text-center">
+      <div className="relative z-10 mx-auto max-w-2xl px-6 text-center">
         {/* Badge */}
-        <div className="mb-8 inline-flex animate-fade-in items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-2">
+        <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-5 py-2.5">
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
           </span>
-          <span className="text-sm font-medium text-primary">
+          <span className="text-sm font-medium text-cyan-400">
             Your {currentYear} Recap is Ready
           </span>
         </div>
 
         {/* Headline */}
-        <h1 className="mb-6 animate-slide-up">
-          <span className="block text-5xl font-bold tracking-tight text-foreground md:text-7xl">
+        <h1 className="mb-8">
+          <span className="block text-6xl font-bold tracking-tight text-white md:text-7xl lg:text-8xl">
             Your year.
           </span>
-          <span className="mt-2 block text-5xl font-bold tracking-tight text-gradient md:text-7xl">
+          <span 
+            className="mt-3 block text-6xl font-bold tracking-tight md:text-7xl lg:text-8xl"
+            style={{
+              background: "linear-gradient(135deg, #00DCFA 0%, #3b82f6 50%, #a855f7 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
             On-chain.
           </span>
-          <span className="mt-2 block text-5xl font-bold tracking-tight text-foreground md:text-7xl">
+          <span className="mt-3 block text-6xl font-bold tracking-tight text-white md:text-7xl lg:text-8xl">
             Rewound.
           </span>
         </h1>
 
         {/* Subheadline */}
-        <p className="mx-auto mb-10 max-w-md text-lg text-muted-foreground animate-slide-up delay-100">
+        <p className="mx-auto mb-12 max-w-lg text-xl text-zinc-400 leading-relaxed">
           Every swap, every mint, every late-night transaction.{" "}
-          <span className="text-foreground">See it all.</span>
+          <span className="text-white">See it all.</span>
         </p>
 
         {/* CTA Section */}
-        <div className="animate-slide-up delay-200">
+        <div>
           {!isConnected ? (
-            <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col items-center gap-5">
               {!showManualInput ? (
                 <>
                   <ConnectButton.Custom>
@@ -94,7 +105,7 @@ export function Hero() {
                         <button
                           onClick={openConnectModal}
                           disabled={!ready}
-                          className="group relative inline-flex items-center gap-3 rounded-xl bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground transition-all hover:bg-cyan-dim hover:shadow-glow"
+                          className="group relative inline-flex items-center gap-3 rounded-2xl bg-cyan-400 px-10 py-5 text-lg font-semibold text-black transition-all hover:bg-cyan-300 hover:shadow-[0_0_30px_rgba(0,220,250,0.4)]"
                         >
                           <WalletIcon className="h-5 w-5" />
                           Connect Wallet
@@ -106,24 +117,22 @@ export function Hero() {
 
                   <button
                     onClick={() => setShowManualInput(true)}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-sm text-zinc-500 hover:text-white transition-colors underline underline-offset-4"
                   >
                     or enter an address manually
                   </button>
                 </>
               ) : (
                 <form onSubmit={handleManualSubmit} className="w-full max-w-md">
-                  <div className="flex flex-col gap-3">
-                    <div className="relative">
-                      <input
-                        type="text"
-                        value={manualAddress}
-                        onChange={(e) => setManualAddress(e.target.value)}
-                        placeholder="0x... or Solana address"
-                        className="w-full rounded-xl border border-border bg-card px-4 py-4 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary font-mono text-sm"
-                        autoFocus
-                      />
-                    </div>
+                  <div className="flex flex-col gap-4">
+                    <input
+                      type="text"
+                      value={manualAddress}
+                      onChange={(e) => setManualAddress(e.target.value)}
+                      placeholder="0x... or Solana address"
+                      className="w-full rounded-xl border border-white/20 bg-white/5 px-5 py-4 text-white placeholder:text-zinc-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 font-mono text-sm"
+                      autoFocus
+                    />
                     <div className="flex gap-3">
                       <button
                         type="button"
@@ -131,14 +140,14 @@ export function Hero() {
                           setShowManualInput(false);
                           setManualAddress("");
                         }}
-                        className="flex-1 btn-secondary"
+                        className="flex-1 rounded-xl border border-white/20 bg-transparent px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-white/10"
                       >
                         Back
                       </button>
                       <button
                         type="submit"
                         disabled={!manualAddress.trim()}
-                        className="flex-1 btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex-1 rounded-xl bg-cyan-400 px-6 py-3.5 text-sm font-semibold text-black transition-all hover:bg-cyan-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         View Recap
                       </button>
@@ -147,28 +156,29 @@ export function Hero() {
                 </form>
               )}
 
-              <p className="mt-4 text-xs text-muted-foreground">
+              <p className="mt-2 text-xs text-zinc-600">
                 Read-only access. We never touch your keys.
               </p>
             </div>
           ) : (
-            <div className="flex flex-col items-center gap-4">
-              <div className="mb-2 flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-4 py-2">
+            <div className="flex flex-col items-center gap-5">
+              {/* Connected badge */}
+              <div className="flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2">
                 <span className="relative flex h-2 w-2">
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                 </span>
-                <span className="text-sm font-medium text-green-500">
+                <span className="text-sm font-medium text-emerald-400">
                   Connected
                 </span>
               </div>
 
-              <p className="font-mono text-sm text-muted-foreground mb-2">
+              <p className="font-mono text-sm text-zinc-500">
                 {address?.slice(0, 6)}...{address?.slice(-4)}
               </p>
 
               <button
                 onClick={handleViewRecap}
-                className="group relative inline-flex items-center gap-3 rounded-xl bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground transition-all hover:bg-cyan-dim hover:shadow-glow"
+                className="group relative inline-flex items-center gap-3 rounded-2xl bg-cyan-400 px-10 py-5 text-lg font-semibold text-black transition-all hover:bg-cyan-300 hover:shadow-[0_0_30px_rgba(0,220,250,0.4)]"
               >
                 <SparklesIcon className="h-5 w-5" />
                 View Your {currentYear} Recap
@@ -177,26 +187,26 @@ export function Hero() {
 
               <button
                 onClick={() => setShowManualInput(true)}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-zinc-500 hover:text-white transition-colors underline underline-offset-4"
               >
                 or view a different address
               </button>
 
               {showManualInput && (
                 <form onSubmit={handleManualSubmit} className="w-full max-w-md mt-4">
-                  <div className="flex gap-2">
+                  <div className="flex gap-3">
                     <input
                       type="text"
                       value={manualAddress}
                       onChange={(e) => setManualAddress(e.target.value)}
                       placeholder="0x... or Solana address"
-                      className="flex-1 rounded-lg border border-border bg-card px-4 py-2 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary font-mono text-sm"
+                      className="flex-1 rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder:text-zinc-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 font-mono text-sm"
                       autoFocus
                     />
                     <button
                       type="submit"
                       disabled={!manualAddress.trim()}
-                      className="btn-primary disabled:opacity-50"
+                      className="rounded-xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-black transition-all hover:bg-cyan-300 disabled:opacity-50"
                     >
                       Go
                     </button>
@@ -208,15 +218,26 @@ export function Hero() {
         </div>
 
         {/* Scroll hint */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-in delay-500">
-          <div className="flex flex-col items-center gap-2 text-muted-foreground">
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
+          <div className="flex flex-col items-center gap-3 text-zinc-600">
             <span className="text-xs">Scroll to explore</span>
-            <div className="flex h-8 w-5 items-start justify-center rounded-full border border-muted-foreground/30 p-1.5">
-              <div className="h-1.5 w-1 rounded-full bg-muted-foreground/50 animate-float" />
+            <div className="flex h-9 w-5 items-start justify-center rounded-full border border-zinc-700 p-1.5">
+              <div 
+                className="h-2 w-1 rounded-full bg-zinc-600"
+                style={{ animation: "float 2s ease-in-out infinite" }}
+              />
             </div>
           </div>
         </div>
       </div>
+
+      {/* CSS Animation */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+      `}</style>
     </section>
   );
 }
