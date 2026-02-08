@@ -21,12 +21,19 @@ async function fetchTransfers(
     apiKey: string,
     address: string,
     direction: 'from' | 'to',
-    year: number
+    year: number,
+    chainSlug: keyof typeof SUPPORTED_CHAINS
 ): Promise<any[]> {
     const url = `${baseUrl}/${apiKey}`;
     let allTransfers: any[] = [];
     let pageKey: string | undefined = undefined;
     let isYearOutOfBounds = false;
+
+    // "internal" only supported on ETH and Polygon
+    const supportsInternal = chainSlug === 'eth-mainnet' || chainSlug === 'polygon-mainnet';
+    const categories = supportsInternal
+        ? ["external", "internal", "erc20", "erc721", "erc1155"]
+        : ["external", "erc20", "erc721", "erc1155"];
 
     while (!isYearOutOfBounds) {
         const params: any = {
@@ -35,7 +42,8 @@ async function fetchTransfers(
             withMetadata: true,
             excludeZeroValue: false,
             maxCount: "0x3e8", // 1000 in hex
-            category: ["external", "internal", "erc20", "erc721", "erc1155"]
+            category: categories,
+            order: "desc" // newest first
         };
 
         // set direction filter
@@ -60,6 +68,12 @@ async function fetchTransfers(
                 params: [params]
             })
         });
+        
+        // Handle non-success responses
+        if (!response.ok) {
+            console.error(`Alchemy request failed: ${response.status}`);
+            return allTransfers; // Return what we have so far
+        } 
 
         const data = await response.json();
 
@@ -69,12 +83,14 @@ async function fetchTransfers(
         }
 
         const transfers = data.result?.transfers ?? [];
-        if (transfer.length === 0) break;
+        if (transfers.length === 0) break;
 
         for (const transfer of transfers) {
             // extract timestamp from metadata
             const blockTime = transfer.metadata?.blockTimestamp;
-            if (!blockTime) continue;
+            if (!blockTime) {
+                continue;
+            }
 
             const txYear = new Date(blockTime).getFullYear();
 
@@ -102,12 +118,13 @@ async function getTransfersForChain(
     baseUrl: string,
     apiKey: string,
     address: string,
-    year: number
+    year: number,
+    chainSlug: keyof typeof SUPPORTED_CHAINS
 ): Promise<any[]> {
     // fetch both directions
     const [fromTransfers, toTransfers] = await Promise.all([
-        fetchTransfers(baseUrl, apiKey, address, 'from', year),
-        fetchTransfers(baseUrl, apiKey, address, 'to', year)
+        fetchTransfers(baseUrl, apiKey, address, 'from', year, chainSlug),
+        fetchTransfers(baseUrl, apiKey, address, 'to', year, chainSlug)
     ]);
 
     // deduplicate by uniqueId
@@ -152,6 +169,8 @@ async function fetchGasForTransactions(
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(batchRequest)
         });
+
+        const results = await response.json();
 
         for (const result of results) {
             if (result.result) {
@@ -218,7 +237,7 @@ function transformAlchemyTransfers(
         let gasSpentNative = 0;
 
         if (gasData) {
-            gasSpentNative = Number(gasData.getUsed * gasData.gasPrice) / 1e18;
+            gasSpentNative = Number(gasData.gasUsed * gasData.gasPrice) / 1e18;
         }
 
         // get timestamp from first transfer in group
@@ -253,7 +272,7 @@ export async function getTransactionsAlchemy(
             if (!baseUrl) return [];
 
             // 1. fetch transfers for this chain
-            const transfers = await getTransfersForChain(baseUrl, apiKey, address, year);
+            const transfers = await getTransfersForChain(baseUrl, apiKey, address, year, chainSlug);
             if (transfers.length === 0) return [];
 
             // 2. get unique transaction txHashes
