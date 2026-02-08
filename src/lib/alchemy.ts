@@ -150,7 +150,7 @@ async function fetchGasForTransactions(
         const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(batchRequest);
+            body: JSON.stringify(batchRequest)
         });
 
         for (const result of results) {
