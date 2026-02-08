@@ -1,38 +1,45 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { Providers } from "./providers";
-import { Header } from "../components/Header.tsx";
+import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-sans",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
-  title: "WalletRewind",
-  description: "Your early crypto recap",
+  title: "WalletRewind | Your Year On-Chain",
+  description:
+    "See your yearly crypto recap across all chains. Every swap, every mint, every transaction — beautifully visualized.",
+  openGraph: {
+    title: "WalletRewind | Your Year On-Chain",
+    description:
+      "See your yearly crypto recap across all chains. Every swap, every mint, every transaction — beautifully visualized.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WalletRewind | Your Year On-Chain",
+    description:
+      "See your yearly crypto recap across all chains. Every swap, every mint, every transaction — beautifully visualized.",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Providers>
-            <Header />
-            {children}
-        </Providers>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className="font-sans antialiased">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
