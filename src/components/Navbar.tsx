@@ -4,15 +4,15 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export function Navbar() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
-      <nav className="container-wide flex items-center justify-between py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2.5 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 border border-primary/20 transition-all group-hover:bg-primary/20 group-hover:border-primary/40">
+        <a href="/" className="flex items-center gap-3 group">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-500/10 border border-cyan-500/20 transition-all group-hover:bg-cyan-500/20 group-hover:border-cyan-500/40">
             <svg
               viewBox="0 0 24 24"
               fill="none"
-              className="h-5 w-5 text-primary"
+              className="h-5 w-5 text-cyan-400"
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
@@ -23,7 +23,7 @@ export function Navbar() {
               <polygon points="22 19 13 12 22 5 22 19" />
             </svg>
           </div>
-          <span className="text-lg font-bold tracking-tight text-foreground">
+          <span className="text-lg font-bold tracking-tight text-white">
             WalletRewind
           </span>
         </a>
@@ -57,7 +57,7 @@ export function Navbar() {
                     return (
                       <button
                         onClick={openConnectModal}
-                        className="btn-primary flex items-center gap-2"
+                        className="flex items-center gap-2 rounded-lg bg-cyan-400 px-4 py-2.5 text-sm font-semibold text-black transition-all hover:bg-cyan-300 hover:shadow-[0_0_20px_rgba(0,220,250,0.3)]"
                       >
                         <WalletIcon className="h-4 w-4" />
                         Connect
@@ -69,7 +69,7 @@ export function Navbar() {
                     return (
                       <button
                         onClick={openChainModal}
-                        className="btn-primary bg-destructive hover:bg-destructive/90"
+                        className="rounded-lg bg-red-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-red-400"
                       >
                         Wrong network
                       </button>
@@ -80,7 +80,7 @@ export function Navbar() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={openChainModal}
-                        className="flex items-center gap-2 rounded-lg bg-secondary px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary/80"
+                        className="flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/15"
                       >
                         {chain.hasIcon && chain.iconUrl && (
                           <img
@@ -94,7 +94,7 @@ export function Navbar() {
 
                       <button
                         onClick={openAccountModal}
-                        className="btn-secondary flex items-center gap-2"
+                        className="flex items-center gap-2 rounded-lg border border-white/20 bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10"
                       >
                         {account.displayName}
                       </button>
