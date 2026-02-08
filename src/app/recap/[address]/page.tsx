@@ -29,9 +29,19 @@ export default async function RecapPage({
         }
     }
 
-    const year = yearParam ? parseInt(yearParam, 10) : new Date().getFullYear(); 
-    const recap = await getWalletRecap(validatedAddress, year);
-    
+    const year = yearParam ? parseInt(yearParam, 10) : new Date().getFullYear();
+    let recap;
+    try {
+        recap = await getWalletRecap(validatedAddress, year);
+    } catch (error) {
+        console.error('Failed to fetch wallet recap:', error);
+        return (
+            <div>
+                <AddressInput error="Unable to load wallet data. Please try again later." />
+            </div>
+        )
+    }
+     
     return (
         <div>
             <AddressInput />
