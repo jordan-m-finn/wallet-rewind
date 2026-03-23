@@ -14,30 +14,27 @@ Gemini Wrapped is an annual recap experience that gives users a personalized, vi
 
 **Four Products, One Concept:**
 
-| Product                      | Team               | Data Source | MVP Priority | Design       |
-| ---------------------------- | ------------------ | ----------- | ------------ | ------------ |
-| **Credit Card Recap**        | Credit Card        | Mocked      | 🥇 Primary   | Mobile-first |
-| **Prediction Markets Recap** | Prediction Markets | Mocked      | 🥈 Secondary | Mobile-first |
-| **WalletRewind**             | On-Chain           | Real APIs   | 🥉 Tertiary  | Mobile-first |
-| **Trading Recap**            | Exchange           | Mocked      | 4th          | Desktop      |
+| Product | Team | Data Source | MVP Priority | Design |
+|---------|------|-------------|--------------|--------|
+| **Credit Card Recap** | Credit Card | Mocked | 🥇 Primary | Mobile-first |
+| **Prediction Markets Recap** | Prediction Markets | Mocked | 🥈 Secondary | Mobile-first |
+| **WalletRewind** | On-Chain | Real APIs | 🥉 Tertiary | Mobile-first |
+| **Trading Recap** | Exchange | Mocked | 4th | Desktop |
 
 ### 1.2 Why Build This?
 
 **For Users:**
-
 - Personalized insights they can't get elsewhere
 - Shareable content for social media
 - Annual ritual that creates anticipation
 
 **For Gemini:**
-
 - Drives annual re-engagement across all products
 - Organic social marketing (every share = Gemini exposure)
 - Differentiates Gemini in a crowded market
 - Cross-product touchpoint reinforces ecosystem value
 
 **For This Proposal:**
-
 - Shows product-focused thinking across Gemini's product line
 - Further reinforces ownership priority
 - Further reinforces full-stack capabilities
@@ -45,41 +42,37 @@ Gemini Wrapped is an annual recap experience that gives users a personalized, vi
 
 ### 1.3 Production vs MVP
 
-| Aspect         | Production               | MVP (Demo)                                         |
-| -------------- | ------------------------ | -------------------------------------------------- |
-| Access point   | Within each product's UI | Unified demo page                                  |
-| Data source    | Real user data           | Real (Wallet) + Mocked (CC/PM/Trading)             |
-| Authentication | Gemini login             | Wallet connect only                                |
-| Sharing        | Native social + NFT mint | Visual only                                        |
-| Design         | Native to each product   | Mobile-first for CC/PM/Wallet, desktop for Trading |
+| Aspect | Production | MVP (Demo) |
+|--------|------------|------------|
+| Access point | Within each product's UI | Unified demo page |
+| Data source | Real user data | Real (Wallet) + Mocked (CC/PM/Trading) |
+| Authentication | Gemini login | Wallet connect only |
+| Sharing | Native social + NFT mint | Visual only |
+| Design | Native to each product | Mobile-first for CC/PM/Wallet, desktop for Trading |
 
 ---
 
 ## 2. Target Users
 
 ### 2.1 Credit Card Users
-
 - Gemini Credit Card holders
 - Interested in spending insights
 - Want to understand crypto-back rewards patterns
 - Active on social, likely to share status
 
 ### 2.2 Prediction Markets Users
-
 - Active predictors on Gemini markets
 - Engaged with politics, sports, crypto, entertainment outcomes
 - Competitive — want to see win rate and accuracy
 - Social sharers who want to flex correct calls
 
 ### 2.3 Wallet Users
-
 - Use Gemini Wallet or external wallets
 - Multi-chain activity
 - Interested in on-chain footprint
 - NFT collectors, DeFi users
 
 ### 2.4 Traders
-
 - Active on Gemini Exchange
 - Range from casual to power traders
 - Interested in performance metrics
@@ -97,36 +90,35 @@ Gemini Wrapped is an annual recap experience that gives users a personalized, vi
 **Design:** Mobile-first
 
 ### Overview
-
 A visual summary of the user's Gemini Credit Card activity, focusing on spending patterns and crypto-back reward choices.
 
-### Key Metrics _(Subject To Change)_
+### Key Metrics *(Subject To Change)*
 
-| Metric            | Description                     | Display Example         |
-| ----------------- | ------------------------------- | ----------------------- |
-| Total Spend       | Sum of all purchases            | "$24,532"               |
-| Total Crypto-Back | USD value of rewards earned     | "$736"                  |
-| Top Category      | Highest spending category       | "Dining — $4,200"       |
-| Top Merchant      | Most frequented merchant        | "Amazon — 47 purchases" |
-| Favorite Crypto   | Most selected reward token      | "BTC — 8 months"        |
-| Crypto Switches   | Times changed reward selection  | "Changed 5 times"       |
-| Biggest Purchase  | Single largest transaction      | "$2,400 at Apple"       |
-| Countries         | Unique countries with purchases | "4 countries"           |
+| Metric | Description | Display Example |
+|--------|-------------|-----------------|
+| Total Spend | Sum of all purchases | "$24,532" |
+| Total Crypto-Back | USD value of rewards earned | "$736" |
+| Top Category | Highest spending category | "Dining — $4,200" |
+| Top Merchant | Most frequented merchant | "Amazon — 47 purchases" |
+| Favorite Crypto | Most selected reward token | "BTC — 8 months" |
+| Crypto Switches | Times changed reward selection | "Changed 5 times" |
+| Biggest Purchase | Single largest transaction | "$2,400 at Apple" |
+| Countries | Unique countries with purchases | "4 countries" |
 
-### Nameplates (Achievements) _(Subject To Change)_
+### Nameplates (Achievements) *(Subject To Change)*
 
-| Nameplate            | Criteria                               | Icon |
-| -------------------- | -------------------------------------- | ---- |
-| BTC Maximalist       | Selected BTC for rewards 10+ months    | ₿    |
-| ETH Believer         | Selected ETH for rewards 10+ months    | ◊    |
-| Meme Coin Enthusiast | Selected DOGE/SHIB/PEPE for 3+ months  | 🐕   |
-| Reward Optimizer     | Changed crypto-back selection 6+ times | 🔄   |
-| Diamond Card         | Spent $50,000+ annually                | 💎   |
-| Foodie               | 30%+ spend on dining                   | 🍽️   |
-| Globetrotter         | Purchases in 5+ countries              | ✈️   |
-| Night Shopper        | 20%+ purchases after 10pm              | 🌙   |
-| Impulse Buyer        | 10+ purchases over $500                | ⚡   |
-| Consistent           | Made purchases every month             | 📅   |
+| Nameplate | Criteria | Icon |
+|-----------|----------|------|
+| BTC Maximalist | Selected BTC for rewards 10+ months | ₿ |
+| ETH Believer | Selected ETH for rewards 10+ months | ◊ |
+| Meme Coin Enthusiast | Selected DOGE/SHIB/PEPE for 3+ months | 🐕 |
+| Reward Optimizer | Changed crypto-back selection 6+ times | 🔄 |
+| Diamond Card | Spent $50,000+ annually | 💎 |
+| Foodie | 30%+ spend on dining | 🍽️ |
+| Globetrotter | Purchases in 5+ countries | ✈️ |
+| Night Shopper | 20%+ purchases after 10pm | 🌙 |
+| Impulse Buyer | 10+ purchases over $500 | ⚡ |
+| Consistent | Made purchases every month | 📅 |
 
 ### Mock Data Structure
 
@@ -222,42 +214,41 @@ interface CreditCardRecap {
 **Design:** Mobile-first
 
 ### Overview
-
 A visual summary of the user's prediction market activity, highlighting their forecasting accuracy, biggest wins, and prediction patterns.
 
-### Key Metrics _(Subject To Change)_
+### Key Metrics *(Subject To Change)*
 
-| Metric            | Description                          | Display Example      |
-| ----------------- | ------------------------------------ | -------------------- |
-| Total Predictions | Number of markets participated in    | "47 predictions"     |
-| Total Wagered     | Sum of all positions                 | "$3,240"             |
-| Total Won         | Net winnings                         | "+$892"              |
-| Win Rate          | Percentage of correct predictions    | "68%"                |
-| Best Category     | Highest accuracy category            | "Crypto — 82%"       |
-| Biggest Win       | Largest single payout                | "+$340 on BTC $100K" |
-| Biggest Loss      | Largest single loss                  | "-$120 on Election"  |
-| Longest Streak    | Consecutive correct predictions      | "7 in a row"         |
-| Favorite Category | Most predictions made                | "Politics — 18"      |
-| Best Call         | Correctly predicted unlikely outcome | "Called the upset"   |
+| Metric | Description | Display Example |
+|--------|-------------|-----------------|
+| Total Predictions | Number of markets participated in | "47 predictions" |
+| Total Wagered | Sum of all positions | "$3,240" |
+| Total Won | Net winnings | "+$892" |
+| Win Rate | Percentage of correct predictions | "68%" |
+| Best Category | Highest accuracy category | "Crypto — 82%" |
+| Biggest Win | Largest single payout | "+$340 on BTC $100K" |
+| Biggest Loss | Largest single loss | "-$120 on Election" |
+| Longest Streak | Consecutive correct predictions | "7 in a row" |
+| Favorite Category | Most predictions made | "Politics — 18" |
+| Best Call | Correctly predicted unlikely outcome | "Called the upset" |
 
-### Nameplates (Achievements) _(Subject To Change)_
+### Nameplates (Achievements) *(Subject To Change)*
 
-| Nameplate          | Criteria                                   | Icon |
-| ------------------ | ------------------------------------------ | ---- |
-| Oracle             | 70%+ overall win rate                      | 🔮   |
-| Sharp              | 75%+ win rate with 20+ predictions         | 🎯   |
-| Risk Taker         | Average position size $200+                | 🎲   |
-| Political Junkie   | 50%+ predictions on politics               | 🏛️   |
-| Sports Fan         | 50%+ predictions on sports                 | ⚽   |
-| Crypto Prophet     | 50%+ predictions on crypto                 | 📈   |
-| Entertainment Buff | 50%+ predictions on entertainment          | 🎬   |
-| Contrarian         | 5+ wins betting against >70% consensus     | 🔄   |
-| Early Caller       | 3+ correct predictions before odds shifted | ⏰   |
-| All In             | Single position of $1,000+                 | 💰   |
-| Diversified        | Predictions in 5+ categories               | 🎨   |
-| Streak Master      | 5+ correct predictions in a row            | 🔥   |
-| Comeback King      | Recovered from -$500 to positive           | 👑   |
-| Diamond Hands      | Held position through 50%+ swing           | 💎   |
+| Nameplate | Criteria | Icon |
+|-----------|----------|------|
+| Oracle | 70%+ overall win rate | 🔮 |
+| Sharp | 75%+ win rate with 20+ predictions | 🎯 |
+| Risk Taker | Average position size $200+ | 🎲 |
+| Political Junkie | 50%+ predictions on politics | 🏛️ |
+| Sports Fan | 50%+ predictions on sports | ⚽ |
+| Crypto Prophet | 50%+ predictions on crypto | 📈 |
+| Entertainment Buff | 50%+ predictions on entertainment | 🎬 |
+| Contrarian | 5+ wins betting against >70% consensus | 🔄 |
+| Early Caller | 3+ correct predictions before odds shifted | ⏰ |
+| All In | Single position of $1,000+ | 💰 |
+| Diversified | Predictions in 5+ categories | 🎨 |
+| Streak Master | 5+ correct predictions in a row | 🔥 |
+| Comeback King | Recovered from -$500 to positive | 👑 |
+| Diamond Hands | Held position through 50%+ swing | 💎 |
 
 ### Mock Data Structure
 
@@ -351,18 +342,9 @@ interface PredictionMarketsRecap {
     "payout": 280
   },
   "monthlyActivity": {
-    "Jan": 3,
-    "Feb": 5,
-    "Mar": 8,
-    "Apr": 4,
-    "May": 2,
-    "Jun": 3,
-    "Jul": 4,
-    "Aug": 3,
-    "Sep": 5,
-    "Oct": 4,
-    "Nov": 4,
-    "Dec": 2
+    "Jan": 3, "Feb": 5, "Mar": 8, "Apr": 4,
+    "May": 2, "Jun": 3, "Jul": 4, "Aug": 3,
+    "Sep": 5, "Oct": 4, "Nov": 4, "Dec": 2
   },
   "nameplates": ["Oracle", "Crypto Prophet", "Streak Master"]
 }
@@ -376,29 +358,28 @@ interface PredictionMarketsRecap {
 **Design:** Mobile-first
 
 ### Overview
-
 A visual summary of on-chain wallet activity across multiple blockchains. Unlike the other products, this uses real blockchain data via external APIs.
 
-### Key Metrics _(Subject To Change)_
+### Key Metrics *(Subject To Change)*
 
-| Metric             | Description                | Display Example          |
-| ------------------ | -------------------------- | ------------------------ |
-| Total Transactions | Sum across all chains      | "35 transactions"        |
-| Chains Used        | Networks with activity     | "Ethereum, Base, Solana" |
-| Top Token          | Most frequently transacted | "ETH — 7 transactions"   |
-| Gas Spent          | Total fees in USD          | "$1.37"                  |
-| Unique Contracts   | dApps interacted with      | "7 contracts"            |
-| NFTs Transferred   | NFT activity count         | "14 NFTs"                |
+| Metric | Description | Display Example |
+|--------|-------------|-----------------|
+| Total Transactions | Sum across all chains | "35 transactions" |
+| Chains Used | Networks with activity | "Ethereum, Base, Solana" |
+| Top Token | Most frequently transacted | "ETH — 7 transactions" |
+| Gas Spent | Total fees in USD | "$1.37" |
+| Unique Contracts | dApps interacted with | "7 contracts" |
+| NFTs Transferred | NFT activity count | "14 NFTs" |
 
-### Nameplates (Achievements) _(Subject To Change)_
+### Nameplates (Achievements) *(Subject To Change)*
 
-| Nameplate     | Criteria              | Icon |
-| ------------- | --------------------- | ---- |
-| NFT Collector | 10+ NFT transfers     | 🎨   |
-| Gas Guzzler   | $500+ in gas fees     | ⛽   |
-| Chain Hopper  | Activity on 3+ chains | 🔀   |
-| Degen Hours   | Transactions 12am-5am | 🌙   |
-| Early Adopter | Activity in January   | 🌅   |
+| Nameplate | Criteria | Icon |
+|-----------|----------|------|
+| NFT Collector | 10+ NFT transfers | 🎨 |
+| Gas Guzzler | $500+ in gas fees | ⛽ |
+| Chain Hopper | Activity on 3+ chains | 🔀 |
+| Degen Hours | Transactions 12am-5am | 🌙 |
+| Early Adopter | Activity in January | 🌅 |
 
 ### Data Structure (Existing)
 
@@ -414,26 +395,23 @@ interface WalletRecap {
   };
   uniqueContracts: number;
   nftCount: number;
-  gasSpent: Record<
-    string,
-    {
-      native: number;
-      usd: number;
-    }
-  >;
+  gasSpent: Record<string, {
+    native: number;
+    usd: number;
+  }>;
   nameplates: string[];
 }
 ```
 
 ### Technical Implementation (Complete)
 
-| Component           | Technology    | Status |
-| ------------------- | ------------- | ------ |
-| EVM Transactions    | Alchemy API   | ✅     |
-| Solana Transactions | Helius API    | ✅     |
-| Token Metadata      | Helius DAS    | ✅     |
-| USD Prices          | CoinGecko     | ✅     |
-| Address Validation  | viem / manual | ✅     |
+| Component | Technology | Status |
+|-----------|------------|--------|
+| EVM Transactions | Alchemy API | ✅ |
+| Solana Transactions | Helius API | ✅ |
+| Token Metadata | Helius DAS | ✅ |
+| USD Prices | CoinGecko | ✅ |
+| Address Validation | viem / manual | ✅ |
 
 ---
 
@@ -443,39 +421,38 @@ interface WalletRecap {
 **Design:** Desktop (lower priority)
 
 ### Overview
-
 A visual summary of the user's trading activity on Gemini Exchange, highlighting patterns, performance, and trading style.
 
-### Key Metrics _(Subject To Change)_
+### Key Metrics *(Subject To Change)*
 
-| Metric           | Description                 | Display Example     |
-| ---------------- | --------------------------- | ------------------- |
-| Total Volume     | Sum of all trades (USD)     | "$142,500"          |
-| Trades Executed  | Number of trades            | "234 trades"        |
-| Most Traded Pair | Highest volume pair         | "BTC/USD — $89,000" |
-| Unique Assets    | Different tokens traded     | "12 assets"         |
-| Avg Trade Size   | Mean trade value            | "$609"              |
-| Biggest Trade    | Largest single trade        | "$15,000 BTC buy"   |
-| Busiest Month    | Highest activity month      | "March — 45 trades" |
-| Trading Hours    | Most active time            | "2pm - 4pm EST"     |
-| Buy/Sell Ratio   | Proportion of buys to sells | "65% buys"          |
+| Metric | Description | Display Example |
+|--------|-------------|-----------------|
+| Total Volume | Sum of all trades (USD) | "$142,500" |
+| Trades Executed | Number of trades | "234 trades" |
+| Most Traded Pair | Highest volume pair | "BTC/USD — $89,000" |
+| Unique Assets | Different tokens traded | "12 assets" |
+| Avg Trade Size | Mean trade value | "$609" |
+| Biggest Trade | Largest single trade | "$15,000 BTC buy" |
+| Busiest Month | Highest activity month | "March — 45 trades" |
+| Trading Hours | Most active time | "2pm - 4pm EST" |
+| Buy/Sell Ratio | Proportion of buys to sells | "65% buys" |
 
-### Nameplates (Achievements) _(Subject To Change)_
+### Nameplates (Achievements) *(Subject To Change)*
 
-| Nameplate         | Criteria                    | Icon |
-| ----------------- | --------------------------- | ---- |
-| Diamond Hands     | Average hold time 60+ days  | 💎   |
-| Day Trader        | 50%+ trades closed same day | 📈   |
-| DCA Believer      | 10+ recurring buys          | 🔁   |
-| Whale             | Single trade over $100,000  | 🐋   |
-| Diversified       | Traded 15+ different assets | 🎨   |
-| BTC Only          | 90%+ volume in BTC          | ₿    |
-| Alt Explorer      | 50%+ volume in non-BTC/ETH  | 🔍   |
-| Night Owl         | 30%+ trades after midnight  | 🦉   |
-| Early Bird        | 30%+ trades before 7am      | 🌅   |
-| Consistent Trader | Traded every month          | 📅   |
-| Dip Buyer         | Bought during 3+ major dips | 🛒   |
-| Peak Seller       | Sold during 3+ local tops   | 🎯   |
+| Nameplate | Criteria | Icon |
+|-----------|----------|------|
+| Diamond Hands | Average hold time 60+ days | 💎 |
+| Day Trader | 50%+ trades closed same day | 📈 |
+| DCA Believer | 10+ recurring buys | 🔁 |
+| Whale | Single trade over $100,000 | 🐋 |
+| Diversified | Traded 15+ different assets | 🎨 |
+| BTC Only | 90%+ volume in BTC | ₿ |
+| Alt Explorer | 50%+ volume in non-BTC/ETH | 🔍 |
+| Night Owl | 30%+ trades after midnight | 🦉 |
+| Early Bird | 30%+ trades before 7am | 🌅 |
+| Consistent Trader | Traded every month | 📅 |
+| Dip Buyer | Bought during 3+ major dips | 🛒 |
+| Peak Seller | Sold during 3+ local tops | 🎯 |
 
 ### Mock Data Structure
 
@@ -526,21 +503,8 @@ interface TradingRecap {
     { "pair": "ETH/USD", "volume": 32000, "count": 64 },
     { "pair": "SOL/USD", "volume": 12500, "count": 43 }
   ],
-  "uniqueAssets": [
-    "BTC",
-    "ETH",
-    "SOL",
-    "MATIC",
-    "LINK",
-    "UNI",
-    "AAVE",
-    "ARB",
-    "OP",
-    "DOGE",
-    "SHIB",
-    "PEPE"
-  ],
-  "avgTradeSize": 609.4,
+  "uniqueAssets": ["BTC", "ETH", "SOL", "MATIC", "LINK", "UNI", "AAVE", "ARB", "OP", "DOGE", "SHIB", "PEPE"],
+  "avgTradeSize": 609.40,
   "biggestTrade": {
     "pair": "BTC/USD",
     "side": "buy",
@@ -548,18 +512,9 @@ interface TradingRecap {
     "date": "2026-03-12"
   },
   "monthlyActivity": {
-    "Jan": 18,
-    "Feb": 22,
-    "Mar": 45,
-    "Apr": 31,
-    "May": 19,
-    "Jun": 24,
-    "Jul": 15,
-    "Aug": 12,
-    "Sep": 14,
-    "Oct": 11,
-    "Nov": 13,
-    "Dec": 10
+    "Jan": 18, "Feb": 22, "Mar": 45, "Apr": 31,
+    "May": 19, "Jun": 24, "Jul": 15, "Aug": 12,
+    "Sep": 14, "Oct": 11, "Nov": 13, "Dec": 10
   },
   "busiestMonth": "March",
   "tradingHours": {
@@ -643,22 +598,22 @@ Each product follows the same narrative structure:
 ```
 1. INTRO SLIDE
    "Your [Product] Year in Review"
-
+   
 2. BIG NUMBER
    Total spend / predictions / volume / transactions
-
+   
 3. BREAKDOWN
    Categories / accuracy / chains / pairs
-
+   
 4. TOP ITEM
    Favorite merchant / best call / top token / most traded
-
+   
 5. FUN STAT
    Unique insight (countries, streak, gas, trading hours)
-
+   
 6. NAMEPLATES
    Achievements earned
-
+   
 7. SUMMARY
    All stats at a glance + share CTA
 ```
@@ -669,18 +624,18 @@ Each product follows the same narrative structure:
 
 ### 5.1 Mobile-First Approach
 
-| Product            | Viewport         | Rationale                          |
-| ------------------ | ---------------- | ---------------------------------- |
-| Credit Card        | 390px (mobile)   | Users access via Gemini mobile app |
-| Prediction Markets | 390px (mobile)   | Quick, social-first predictions    |
-| WalletRewind       | 390px (mobile)   | Wallet users on mobile             |
-| Trading            | 1200px (desktop) | Traders use desktop platforms      |
+| Product | Viewport | Rationale |
+|---------|----------|-----------|
+| Credit Card | 390px (mobile) | Users access via Gemini mobile app |
+| Prediction Markets | 390px (mobile) | Quick, social-first predictions |
+| WalletRewind | 390px (mobile) | Wallet users on mobile |
+| Trading | 1200px (desktop) | Traders use desktop platforms |
 
 ### 5.2 Mobile Slide Dimensions
 
 ```
 ┌─────────────────────────┐
-│                         │
+│                         │  
 │     390px × 844px       │
 │     (iPhone 14 Pro)     │
 │                         │
@@ -696,32 +651,32 @@ Each product follows the same narrative structure:
 └─────────────────────────┘
 ```
 
-### 5.3 Color Palette _(Subject To Change)_
+### 5.3 Color Palette *(Subject To Change)*
 
-| Token           | Hex     | Usage               |
-| --------------- | ------- | ------------------- |
-| Background      | #050505 | Page background     |
-| Card            | #0d0f12 | Elevated surfaces   |
-| Border          | #1a1c20 | Subtle dividers     |
-| Muted Text      | #5f6368 | Secondary text      |
-| Primary Text    | #fafafa | Headlines, body     |
-| Cyan (Primary)  | #00DCFA | Gemini accent, CTAs |
-| Gradient Purple | #a855f7 | Slide gradients     |
-| Gradient Blue   | #3b82f6 | Slide gradients     |
-| Gradient Teal   | #14b8a6 | Slide gradients     |
-| Gradient Orange | #f97316 | Slide gradients     |
-| Gradient Pink   | #ec4899 | Slide gradients     |
+| Token | Hex | Usage |
+|-------|-----|-------|
+| Background | #050505 | Page background |
+| Card | #0d0f12 | Elevated surfaces |
+| Border | #1a1c20 | Subtle dividers |
+| Muted Text | #5f6368 | Secondary text |
+| Primary Text | #fafafa | Headlines, body |
+| Cyan (Primary) | #00DCFA | Gemini accent, CTAs |
+| Gradient Purple | #a855f7 | Slide gradients |
+| Gradient Blue | #3b82f6 | Slide gradients |
+| Gradient Teal | #14b8a6 | Slide gradients |
+| Gradient Orange | #f97316 | Slide gradients |
+| Gradient Pink | #ec4899 | Slide gradients |
 
-### 5.4 Product-Specific Accents _(Subject To Change)_
+### 5.4 Product-Specific Accents *(Subject To Change)*
 
-| Product            | Primary Color    | Gradient      |
-| ------------------ | ---------------- | ------------- |
-| Credit Card        | Gold (#FFD700)   | Gold → Orange |
+| Product | Primary Color | Gradient |
+|---------|---------------|----------|
+| Credit Card | Gold (#FFD700) | Gold → Orange |
 | Prediction Markets | Purple (#a855f7) | Purple → Pink |
-| Wallet             | Cyan (#00DCFA)   | Cyan → Blue   |
-| Trading            | Green (#10b981)  | Green → Teal  |
+| Wallet | Cyan (#00DCFA) | Cyan → Blue |
+| Trading | Green (#10b981) | Green → Teal |
 
-### 5.5 Typography _(Subject To Change)_
+### 5.5 Typography *(Subject To Change)*
 
 - **Headlines:** Inter Bold, tight tracking
 - **Body:** Inter Regular
@@ -739,7 +694,6 @@ Social sharing is a core driver of Gemini Wrapped's value. Each recap will inclu
 ### 6.2 Marketing Collaboration
 
 Direct communication with Gemini's marketing teams will be established to:
-
 - Define creative direction for branded social templates
 - Ensure brand consistency across all shareable assets
 - Coordinate launch timing and promotional campaigns
@@ -747,17 +701,16 @@ Direct communication with Gemini's marketing teams will be established to:
 
 ### 6.3 Social Templates
 
-| Platform    | Format     | Dimensions    | Content                                       |
-| ----------- | ---------- | ------------- | --------------------------------------------- |
-| X (Twitter) | Image card | 1200 × 675px  | Summary slide with key stat + nameplates      |
-| Instagram   | Story      | 1080 × 1920px | Full recap carousel or single highlight       |
-| Instagram   | Post       | 1080 × 1080px | Square summary with branded frame             |
-| LinkedIn    | Post       | 1200 × 627px  | Professional summary emphasizing achievements |
+| Platform | Format | Dimensions | Content |
+|----------|--------|------------|---------|
+| X (Twitter) | Image card | 1200 × 675px | Summary slide with key stat + nameplates |
+| Instagram | Story | 1080 × 1920px | Full recap carousel or single highlight |
+| Instagram | Post | 1080 × 1080px | Square summary with branded frame |
+| LinkedIn | Post | 1200 × 627px | Professional summary emphasizing achievements |
 
 ### 6.4 Template Elements
 
 Each social template will include:
-
 - Gemini branding (logo, colors)
 - User's key stat (total spend, win rate, etc.)
 - 1-2 nameplates earned
@@ -810,9 +763,17 @@ src/
 │   ├── layout.tsx
 │   ├── page.tsx                    # Main landing with product selector
 │   ├── providers.tsx
+│   ├── api/
+│   │   └── recap/
+│   │       ├── credit-card/
+│   │       │   └── route.ts        # GET /api/recap/credit-card
+│   │       ├── prediction-markets/
+│   │       │   └── route.ts        # GET /api/recap/prediction-markets
+│   │       └── trading/
+│   │           └── route.ts        # GET /api/recap/trading
 │   └── recap/
 │       └── [address]/
-│           └── page.tsx            # WalletRewind display
+│           └── page.tsx            # WalletRewind display (real data)
 │
 ├── components/
 │   ├── Navbar.tsx
@@ -831,24 +792,20 @@ src/
 │   ├── Nameplate.tsx               # Achievement badge
 │   └── StatCard.tsx                # Reusable stat display
 │
-├── lib/
-│   ├── alchemy.ts
-│   ├── helius.ts
-│   ├── prices.ts
-│   ├── aggregators.ts
-│   ├── recap.ts                    # WalletRewind orchestrator
-│   ├── types.ts                    # All TypeScript interfaces
-│   ├── wagmi.ts
-│   ├── utils.ts
-│   └── mocks/
-│       ├── creditCard.ts           # Mock CC data
-│       ├── predictionMarkets.ts    # Mock PM data
-│       └── trading.ts              # Mock trading data
-│
-└── data/
-    ├── creditCardMock.json
-    ├── predictionMarketsMock.json
-    └── tradingMock.json
+└── lib/
+    ├── alchemy.ts
+    ├── helius.ts
+    ├── prices.ts
+    ├── aggregators.ts
+    ├── recap.ts                    # WalletRewind orchestrator
+    ├── types.ts                    # All TypeScript interfaces
+    ├── wagmi.ts
+    ├── utils.ts
+    └── mocks/
+        ├── index.ts                # Re-exports all mocks
+        ├── creditCard.ts           # Mock CC data + service
+        ├── predictionMarkets.ts    # Mock PM data + service
+        └── trading.ts              # Mock trading data + service
 ```
 
 ### 7.3 Shared Types
@@ -880,10 +837,10 @@ interface TradingRecap extends BaseRecap {
   // ... fields defined in Section 3.4
 }
 
-type GeminiRecap =
-  | CreditCardRecap
-  | PredictionMarketsRecap
-  | WalletRecap
+type GeminiRecap = 
+  | CreditCardRecap 
+  | PredictionMarketsRecap 
+  | WalletRecap 
   | TradingRecap;
 ```
 
@@ -893,16 +850,16 @@ type GeminiRecap =
 
 ### 8.1 MVP Phases
 
-| Phase                     | Scope                                              | Status      |
-| ------------------------- | -------------------------------------------------- | ----------- |
-| **1. Foundation**         | WalletRewind backend, design system, homepage      | ✅ Complete |
-| **2. Unified Interface**  | ProductSelector, state management, mock data files | 🔲 To Do    |
-| **3. Slide System**       | RecapSlides container, 7 slide types, mobile frame | 🔲 To Do    |
-| **4. Credit Card**        | CC mock data → slides (mobile-first)               | 🔲 To Do    |
-| **5. Prediction Markets** | PM mock data → slides (mobile-first)               | 🔲 To Do    |
-| **6. WalletRewind UI**    | Real data → slides (mobile-first)                  | 🔲 To Do    |
-| **7. Trading**            | Trading mock data → slides (desktop)               | 🔲 To Do    |
-| **8. Polish**             | Animations, transitions, error states              | 🔲 To Do    |
+| Phase | Scope | Status |
+|-------|-------|--------|
+| **1. Foundation** | WalletRewind backend, design system, homepage | ✅ Complete |
+| **2. Unified Interface** | ProductSelector, state management, mock data files | 🔲 To Do |
+| **3. Slide System** | RecapSlides container, 7 slide types, mobile frame | 🔲 To Do |
+| **4. Credit Card** | CC mock data → slides (mobile-first) | 🔲 To Do |
+| **5. Prediction Markets** | PM mock data → slides (mobile-first) | 🔲 To Do |
+| **6. WalletRewind UI** | Real data → slides (mobile-first) | 🔲 To Do |
+| **7. Trading** | Trading mock data → slides (desktop) | 🔲 To Do |
+| **8. Polish** | Animations, transitions, error states | 🔲 To Do |
 
 ---
 
@@ -910,14 +867,14 @@ type GeminiRecap =
 
 ### 9.1 Timeline Overview
 
-| Phase                  | Timeframe                 | Focus                                  |
-| ---------------------- | ------------------------- | -------------------------------------- |
-| **MVP Demo**           | Now – June 2026           | Prototype for presentation             |
-| **Production Kickoff** | July 2026                 | Jordan returns, team forms             |
-| **Design & Planning**  | July – August 2026        | UI/UX collaboration, data requirements |
-| **Development**        | September – November 2026 | Build per-product recaps               |
-| **QA & Polish**        | December 2026             | Testing, edge cases, performance       |
-| **Launch**             | January 2027              | Gemini Wrapped 2026 goes live          |
+| Phase | Timeframe | Focus |
+|-------|-----------|-------|
+| **MVP Demo** | Now – June 2026 | Prototype for presentation |
+| **Production Kickoff** | July 2026 | Jordan returns, team forms |
+| **Design & Planning** | July – August 2026 | UI/UX collaboration, data requirements |
+| **Development** | September – November 2026 | Build per-product recaps |
+| **QA & Polish** | December 2026 | Testing, edge cases, performance |
+| **Launch** | January 2027 | Gemini Wrapped 2026 goes live |
 
 ### 9.2 Cross-Team Structure
 
@@ -953,27 +910,25 @@ type GeminiRecap =
 
 ### 9.3 Responsibilities
 
-| Role                                      | Responsibilities                                                       |
-| ----------------------------------------- | ---------------------------------------------------------------------- |
+| Role | Responsibilities |
+|------|------------------|
 | **Jordan (Credit Card Rep, Coordinator)** | Overall feature ownership, Credit Card implementation, cross-team sync |
-| **Prediction Markets Rep**                | PM data requirements, PM-specific nameplates, PM slide content         |
-| **On-Chain Wallet Rep**                   | Wallet data APIs, chain coverage, gas calculations                     |
-| **Exchange/Trading Rep**                  | Trading data requirements, trading-specific metrics                    |
-| **UI/UX**                                 | Visual consistency, mobile designs, animations                         |
-| **Product Leads**                         | Prioritization, success metrics, launch coordination                   |
-| **Marketing**                             | Social templates, brand guidelines, launch promotion                   |
+| **Prediction Markets Rep** | PM data requirements, PM-specific nameplates, PM slide content |
+| **On-Chain Wallet Rep** | Wallet data APIs, chain coverage, gas calculations |
+| **Exchange/Trading Rep** | Trading data requirements, trading-specific metrics |
+| **UI/UX** | Visual consistency, mobile designs, animations |
+| **Product Leads** | Prioritization, success metrics, launch coordination |
+| **Marketing** | Social templates, brand guidelines, launch promotion |
 
 ### 9.4 Coordination Model
 
 **Option A: Jordan as Cross-Team Coordinator**
-
 - Jordan owns the Wrapped feature across all products
 - Attends standups for each team as needed
 - Single point of contact for UI/UX, Product, and Marketing
 - 6-month dedicated focus
 
 **Option B: Representative Model**
-
 - Each team owns their product's recap
 - Jordan owns Credit Card + coordinates
 - Weekly sync across all reps
@@ -981,15 +936,15 @@ type GeminiRecap =
 
 ### 9.5 Monthly Milestones
 
-| Month         | Milestone                                                              |
-| ------------- | ---------------------------------------------------------------------- |
-| **July**      | Team formed, kickoff, data requirements gathered                       |
-| **August**    | Design mockups approved, shared component library, marketing alignment |
-| **September** | Credit Card + Prediction Markets development                           |
-| **October**   | WalletRewind + Trading development                                     |
-| **November**  | Integration, cross-product testing, social templates finalized         |
-| **December**  | QA, performance, launch prep                                           |
-| **January**   | 🚀 Launch Gemini Wrapped 2026                                          |
+| Month | Milestone |
+|-------|-----------|
+| **July** | Team formed, kickoff, data requirements gathered |
+| **August** | Design mockups approved, shared component library, marketing alignment |
+| **September** | Credit Card + Prediction Markets development |
+| **October** | WalletRewind + Trading development |
+| **November** | Integration, cross-product testing, social templates finalized |
+| **December** | QA, performance, launch prep |
+| **January** | 🚀 Launch Gemini Wrapped 2026 |
 
 ---
 
@@ -997,22 +952,22 @@ type GeminiRecap =
 
 ### 10.1 Data Sources (Production)
 
-| Product            | MVP Source       | Production Source                |
-| ------------------ | ---------------- | -------------------------------- |
-| Credit Card        | Static mock JSON | Gemini Card transaction API      |
+| Product | MVP Source | Production Source |
+|---------|------------|-------------------|
+| Credit Card | Static mock JSON | Gemini Card transaction API |
 | Prediction Markets | Static mock JSON | Gemini PM positions/outcomes API |
-| Trading            | Static mock JSON | Gemini Exchange API              |
-| WalletRewind       | Alchemy + Helius | Gemini internal indexers         |
+| Trading | Static mock JSON | Gemini Exchange API |
+| WalletRewind | Alchemy + Helius | Gemini internal indexers |
 
 ### 10.2 Gemini Infrastructure Advantages
 
-| MVP Limitation              | Gemini Advantage         |
-| --------------------------- | ------------------------ |
-| External APIs (rate limits) | Direct database access   |
-| Public wallet data only     | Authenticated user data  |
-| No personalization          | Full user context        |
-| Manual address input        | Auto-detect from session |
-| Mocked data                 | Real transaction history |
+| MVP Limitation | Gemini Advantage |
+|----------------|------------------|
+| External APIs (rate limits) | Direct database access |
+| Public wallet data only | Authenticated user data |
+| No personalization | Full user context |
+| Manual address input | Auto-detect from session |
+| Mocked data | Real transaction history |
 
 ### 10.3 Cross-Product Insights (Future)
 
@@ -1025,12 +980,12 @@ With production data, Gemini could offer combined insights:
 
 ### 10.4 Privacy & Compliance
 
-| Consideration      | Approach                              |
-| ------------------ | ------------------------------------- |
-| PII in recaps      | No names, only aggregates             |
-| Sharing            | User-initiated only                   |
-| Data retention     | Computed on-demand, not stored        |
-| CCPA/GDPR          | Standard Gemini compliance            |
+| Consideration | Approach |
+|---------------|----------|
+| PII in recaps | No names, only aggregates |
+| Sharing | User-initiated only |
+| Data retention | Computed on-demand, not stored |
+| CCPA/GDPR | Standard Gemini compliance |
 | Prediction Markets | Comply with jurisdiction restrictions |
 
 ---
@@ -1039,36 +994,36 @@ With production data, Gemini could offer combined insights:
 
 ### 11.1 Engagement Metrics
 
-| Metric              | Target                            |
-| ------------------- | --------------------------------- |
-| Recap views         | 60%+ of eligible users            |
-| Completion rate     | 80%+ view all slides              |
-| Share rate          | 15%+ share to social              |
-| Return visits       | 2+ views per user                 |
+| Metric | Target |
+|--------|--------|
+| Recap views | 60%+ of eligible users |
+| Completion rate | 80%+ view all slides |
+| Share rate | 15%+ share to social |
+| Return visits | 2+ views per user |
 | Cross-product views | 30%+ view another product's recap |
 
 ### 11.2 Business Metrics
 
-| Metric             | Target                   |
-| ------------------ | ------------------------ |
-| Social impressions | 1M+ from shared recaps   |
-| New user signups   | 5%+ lift from social     |
+| Metric | Target |
+|--------|--------|
+| Social impressions | 1M+ from shared recaps |
+| New user signups | 5%+ lift from social |
 | Product cross-sell | 10%+ try another product |
-| NPS impact         | +5 point lift            |
+| NPS impact | +5 point lift |
 
 ---
 
 ## 12. Open Questions
 
-| Question                                               | Owner     | Status |
-| ------------------------------------------------------ | --------- | ------ |
-| Which team owns the unified Wrapped experience?        | Product   | Open   |
-| Should recaps be mintable as NFTs?                     | Product   | Open   |
-| What's the annual release cadence?                     | Product   | Open   |
-| How do we handle users with minimal activity?          | Design    | Open   |
-| Prediction Markets legal review for shareable content? | Legal     | Open   |
-| Should there be a "compare with friends" feature?      | Product   | Open   |
-| Final social template dimensions and formats?          | Marketing | Open   |
+| Question | Owner | Status |
+|----------|-------|--------|
+| Which team owns the unified Wrapped experience? | Product | Open |
+| Should recaps be mintable as NFTs? | Product | Open |
+| What's the annual release cadence? | Product | Open |
+| How do we handle users with minimal activity? | Design | Open |
+| Prediction Markets legal review for shareable content? | Legal | Open |
+| Should there be a "compare with friends" feature? | Product | Open |
+| Final social template dimensions and formats? | Marketing | Open |
 
 ---
 
@@ -1076,17 +1031,16 @@ With production data, Gemini could offer combined insights:
 
 ### A. Competitive Analysis
 
-| Product               | What They Do              | Gemini Differentiation         |
-| --------------------- | ------------------------- | ------------------------------ |
-| Spotify Wrapped       | Annual listening recap    | Proven format, high engagement |
-| Apple Music Replay    | Monthly + annual stats    | Less viral than Spotify        |
-| Polymarket (no recap) | Prediction markets        | Opportunity to differentiate   |
-| Robinhood Recap       | Trading summary (limited) | Basic, not shareable           |
+| Product | What They Do | Gemini Differentiation |
+|---------|--------------|------------------------|
+| Spotify Wrapped | Annual listening recap | Proven format, high engagement |
+| Apple Music Replay | Monthly + annual stats | Less viral than Spotify |
+| Polymarket (no recap) | Prediction markets | Opportunity to differentiate |
+| Robinhood Recap | Trading summary (limited) | Basic, not shareable |
 
 ### B. Sample Slide Content
 
 **Credit Card — Big Number Slide:**
-
 ```
 "You spent"
 $24,532
@@ -1096,7 +1050,6 @@ $24,532
 ```
 
 **Prediction Markets — Fun Stat Slide:**
-
 ```
 "Your longest winning streak?"
 7 PREDICTIONS
@@ -1106,14 +1059,13 @@ $24,532
 ```
 
 **WalletRewind — Nameplates Slide:**
-
 ```
 "You earned 2 nameplates this year"
 
 🎨 NFT Collector
    "14 NFTs touched your wallet"
 
-🔀 Chain Hopper
+🔀 Chain Hopper  
    "Active on 3 different chains"
 ```
 
