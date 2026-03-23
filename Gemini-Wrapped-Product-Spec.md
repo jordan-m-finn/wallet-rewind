@@ -765,6 +765,9 @@ src/
 │   ├── providers.tsx
 │   ├── api/
 │   │   └── recap/
+│   │       ├── wallet/
+│   │       │   └── [address]/
+│   │       │       └── route.ts    # GET /api/recap/wallet/{address}
 │   │       ├── credit-card/
 │   │       │   └── route.ts        # GET /api/recap/credit-card
 │   │       ├── prediction-markets/
