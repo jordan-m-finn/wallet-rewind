@@ -73,6 +73,7 @@ export async function getWalletRecap(address: Address, year: number): Promise<Wa
 
     // Build and return WalletRecap
     const walletRecap: WalletRecap = {
+        type: "wallet",
         address,
         year,
         topToken,
