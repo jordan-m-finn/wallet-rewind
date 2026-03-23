@@ -215,28 +215,7 @@ export function Hero() {
             </div>
           )}
         </div>
-
-        {/* Scroll hint */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
-          <div className="flex flex-col items-center gap-3 text-zinc-600">
-            <span className="text-xs">Scroll to explore</span>
-            <div className="flex h-9 w-5 items-start justify-center rounded-full border border-zinc-700 p-1.5">
-              <div 
-                className="h-2 w-1 rounded-full bg-zinc-600"
-                style={{ animation: "float 2s ease-in-out infinite" }}
-              />
-            </div>
-          </div>
-        </div>
       </div>
-
-      {/* CSS Animation */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-8px); }
-        }
-      `}</style>
     </section>
   );
 }
